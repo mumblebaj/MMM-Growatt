@@ -1,7 +1,8 @@
 Module.register("MMM-Growatt", {
 
     defaults: {
-
+        title: "MMM-Growatt",
+        updateInterval: 1000*60*60
     },
 
     getStyles: function() {
