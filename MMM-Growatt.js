@@ -20,7 +20,7 @@ Module.register("MMM-Growatt", {
     start: function() {
         Log.info(`Starting module: ${this.name}`);
 
-        this.getGrowattData().then()
+        this.getGrowattData();
         this.scheduleUpdate();
     },
 
@@ -59,6 +59,7 @@ Module.register("MMM-Growatt", {
 
     socketNotificationReceived: function(notification, payload) {
         var self = this
+        Log.info(payload)
         if (notification === "GROWATT_DATA") {
             this.growattData = payload
             this.updateDom()

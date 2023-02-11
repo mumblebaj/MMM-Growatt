@@ -11,10 +11,10 @@ module.exports = NodeHelper.create({
         console.log('Starting node helper for ' + this.name)
     },
 
-    deconstructPlantData(d, payload) {
+    deconstructPlantData: function(d, payload) {
         plantDataFiltered = [];
 
-        const plantId = this.payload.plantId;
+        const plantId = payload.plantId;
 
         plantDataFiltered.push({
             "plantName": d[plantId].plantName,
@@ -37,7 +37,7 @@ module.exports = NodeHelper.create({
 
     getGrowattData: async function(payload) {
         const growatt = new api({})
-        let login = await growatt.login(this.payload.user, this.payload.password).catch(e => {console.log(e)})
+        let login = await growatt.login(payload.username, payload.password).catch(e => {console.log(e)})
         console.log('login: ',  login)
         
         let getAllPlantData = await growatt.getAllPlantData(options).catch(e => {console.log(e)})
@@ -48,7 +48,7 @@ module.exports = NodeHelper.create({
 
         var growattDataParsed = plantDataFiltered;
 
-        console.log(growattDataReturned);
+        console.log(growattDataParsed);
 
         this.sendSocketNotification('GROWATT_DATA', growattDataParsed)
     },
