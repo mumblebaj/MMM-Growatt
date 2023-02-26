@@ -44,7 +44,7 @@ module.exports = NodeHelper.create({
 
         var plantData = getAllPlantData;
 
-        var parserResponse = deconstructPlantData(plantData, payload)
+        var parserResponse = this.deconstructPlantData(plantData, payload)
 
         var growattDataParsed = plantDataFiltered;
 
