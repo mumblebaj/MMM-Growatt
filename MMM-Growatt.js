@@ -27,6 +27,8 @@ Module.register("MMM-Growatt", {
     start: function() {
         Log.info(`Starting module: ${this.name}`);
 
+        this.growattData = null;
+
         this.getGrowattData();
         this.scheduleUpdate();
     },
@@ -137,6 +139,7 @@ Module.register("MMM-Growatt", {
     },
 
     generateSolarLine: function() {
+        Log.info(this.payload)
         const solarLine = document.createElement("div");
         solarLine.classList.add("line", "vertical", "top");
         
@@ -147,7 +150,7 @@ Module.register("MMM-Growatt", {
         solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
         solarLine.appendChild(solarLabel);
 
-        if(this.payload.ppv1 > 0) {
+        if(this.growattData.ppv1 > 0) {
             solarLine.classList.add("active");
 
             const solarArrowOut = document.createElement("i");
@@ -172,7 +175,7 @@ Module.register("MMM-Growatt", {
         homeLabel.innerHTML += this.translate("HOME_CONSUMPTION");
         homeLine.appendChild(homeLabel);
 
-        if(this.payload.consumptionPower > 0) {
+        if(this.growattData.consumptionPower > 0) {
             homeLine.classList.add("active");
 
             const homeArrowIn = document.createElement("div");
@@ -189,7 +192,7 @@ Module.register("MMM-Growatt", {
         const gridLine = document.createElement("div");
         gridLine.classList.add("line", "horizontal", "right");
                 
-        if(this.payload.gridPower !== 0)
+        if(this.growattData.gridPower !== 0)
             gridLine.classList.add("active");
 
         const gridLabel = document.createElement("div");
@@ -199,14 +202,14 @@ Module.register("MMM-Growatt", {
         gridLine.appendChild(gridLabel);
 
         // Positive value means feeding to grid
-        if(this.payload.gridPower > 0) {
+        if(this.growattData.gridPower > 0) {
             gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
             gridLabel.classList.add("font-green");
 
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
-        } else if(this.payload.gridPower < 0) {
+        } else if(this.growattData.gridPower < 0) {
             gridLabel.innerHTML += this.translate("GRID_CONSUMPTION");
             gridLabel.classList.add("font-red");
 
