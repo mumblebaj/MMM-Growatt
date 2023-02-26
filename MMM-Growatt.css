@@ -1,0 +1,211 @@
+/* ****************************************
+*    Main wrapper and helper classes
+* ****************************************/
+
+#energymonitor-wrapper {
+    --width: 600px;
+    --height: 500px;
+    --line-width: 8px;
+    --active-color: #FFE377;
+    --default-color: var(--color-text);
+    --line-margin: calc(var(--line-width) * 10);
+    --vertical-center: calc(var(--height) / 2);
+    --horizontal-center: calc(var(--width) / 2);
+    --line-border-radius: calc(var(--line-width) / 5);
+    --arrow-size: calc(var(--line-width) * 3);
+    --vertical-line-length: calc(var(--vertical-center) - var(--line-margin) - (var(--arrow-size) * 1.1));
+    --horizontal-line-length: calc(var(--horizontal-center) - var(--line-margin) - (var(--arrow-size) * 1.1));
+    --icon-size: calc(var(--line-margin) * 0.5);
+  
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    left: calc(50% - (var(--width) / 2));
+    top: calc(50% - (var(--width) / 2));
+    background-color: var(--color-background);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .active {
+    color: #08f310;
+    background-color: #08f310;
+  }
+  
+  .font-green {
+    color: #CDEE69;
+  }
+  
+  .font-red {
+    color: #E09690;
+  }
+  
+  /* ****************************************
+  *    Icons
+  * ****************************************/
+  
+  .icon {
+    position: absolute;
+    font-size: var(--icon-size);
+    color: var(--default-color);
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .icon.horizontal {
+    top: calc(var(--vertical-center) - (var(--icon-size) / 2));
+  }
+  
+  .icon.vertical {
+    left: calc(var(--horizontal-center) - (var(--icon-size) / 2));
+  }
+  
+  .icon.top {
+    top: -4px;
+  }
+  
+  .icon.bottom {
+    bottom: -3px;
+  }
+  
+  .icon.left {
+    left: 0px;
+  }
+  
+  .icon.right {
+    right: 0px;
+  }
+  
+  /* ****************************************
+  *    Labels
+  * ****************************************/
+  
+  .label {
+    position: absolute;
+    color: var(--default-color);
+    font-family: var(--font-primary);
+    font-weight: bold;
+    font-size: var(--font-size-small);
+    border: 2px solid;
+    border-color: var(--default-color);
+    border-radius: 3px;
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+    width: 10ch;
+    position: absolute;
+  }
+  
+  #home-label {
+    left: 20px;
+    top: 10px;
+  }
+  
+  #solar-label {
+    left: 20px;
+    bottom: 20px;
+  }
+  
+  #battery-label {
+    left: 20px;
+    bottom: 20px;
+  }
+  
+  #grid-label {
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  /* ****************************************
+  *    Lines
+  * ****************************************/
+  
+  .line {
+    background-color: var(--default-color);
+  }
+  
+  .line.active {
+    background-color: var(--active-color);
+  }
+  
+  .line.vertical {
+    width: var(--line-width);
+    height: var(--vertical-line-length);
+    left: calc(var(--horizontal-center) - (var(--line-width) / 2));
+    border-radius: var(--line-border-radius);
+    position: relative;
+  }
+  
+  .line.vertical.up {
+    position: absolute;
+    top: var(--line-margin);
+  }
+  
+  .line.vertical.down {
+    position: absolute;
+    bottom: var(--line-margin);
+  }
+  
+  .line.horizontal {
+    width: var(--horizontal-line-length);
+    height: var(--line-width);
+    top: calc(var(--vertical-center) - (var(--line-width) / 2));
+    border-radius: var(--line-border-radius);
+  }
+  
+  .line.horizontal.left {
+    position: absolute;
+    left: var(--line-margin);
+  }
+  
+  .line.horizontal.right {
+    position: absolute;
+    right: var(--line-margin);
+  }
+  
+  /* ****************************************
+  *    Arrows
+  * ****************************************/
+  
+  
+  .arrow {
+    --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px);
+    --arrow-line-centering: calc(-1 * (var(--arrow-size) / 2) + (var(--line-width) / 2));
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    background-color: rgba(0, 0, 0, 0);
+    content: url("icons/caret-down.svg");
+  }
+  
+  .arrow.active {
+    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
+  }
+  
+  .arrow.right {
+    position: absolute;
+    transform: rotate(-90deg);
+    right: var(--arrow-line-distance);
+    top: var(--arrow-line-centering);
+  }
+  
+  .arrow.left {
+    position: absolute;
+    transform: rotate(90deg);
+    left: var(--arrow-line-distance);
+    top: var(--arrow-line-centering);
+  }
+  
+  .arrow.up {
+    position: absolute;
+    transform: rotate(180deg);
+    top: var(--arrow-line-distance);
+    left: var(--arrow-line-centering);
+  }
+  
+  .arrow.down {
+    position: absolute;
+    bottom: var(--arrow-line-distance);
+    left: var(--arrow-line-centering);
+  }
