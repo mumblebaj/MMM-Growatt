@@ -35,10 +35,11 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
-                plantId: "plantId"
+                plantId: "plantId" // Cacn be obtained from the Growatt site by checking your Plant information. This can be accessed from the left side of the screen
         }
 },
 ````
+![Example](images/image-2.png) 
 
 ## Updating
 
