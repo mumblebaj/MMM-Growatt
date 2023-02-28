@@ -6,23 +6,23 @@
     --width: 600px;
     --height: 500px;
     --line-width: 8px;
-    --active-color: #FFE377;
+    --active-color: #0cf747;
     --default-color: var(--color-text);
     --line-margin: calc(var(--line-width) * 10);
     --vertical-center: calc(var(--height) / 2);
     --horizontal-center: calc(var(--width) / 2);
     --line-border-radius: calc(var(--line-width) / 5);
-    --arrow-size: calc(var(--line-width) * 3);
-    --vertical-line-length: calc(var(--vertical-center) - var(--line-margin) - (var(--arrow-size) * 1.1));
-    --horizontal-line-length: calc(var(--horizontal-center) - var(--line-margin) - (var(--arrow-size) * 1.1));
-    --icon-size: calc(var(--line-margin) * 0.5);
+    --arrow-size: calc(var(--line-width) * 1.5);
+    --vertical-line-length: 100px;
+    --horizontal-line-length: 100px;
+    --images-size: calc(var(--line-margin) * 0.5);
   
     width: var(--width);
     height: var(--height);
     position: absolute;
     left: calc(50% - (var(--width) / 2));
     top: calc(50% - (var(--width) / 2));
-    background-color: var(--color-background);
+    /* background-color: var(--color-background); */
   }
   
   .hidden {
@@ -30,12 +30,12 @@
   }
   
   .active {
-    color: #08f310;
+    color: #0cf747;
     background-color: #08f310;
   }
   
   .font-green {
-    color: #CDEE69;
+    color: #0cf747;
   }
   
   .font-red {
@@ -48,33 +48,55 @@
   
   .icon {
     position: absolute;
-    font-size: var(--icon-size);
+    font-size: var(--images-size);
     color: var(--default-color);
     display: inline-block;
     text-align: center;
   }
+
+  .images {
+    position: absolute;
+    display: block;
+    height: 80px;
+    width: 80px;
+    background-size: 100% !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: linear-gradient(90deg, #302b6b 0%, #2e5a90 100%);
+  }
+
+  .images.state_grid{background-image:url(images/state_grid.png)}
+  .images.state_bat_null{background-image:url(images/state_bat_null.png)}
+  .images.state_load{background-image:url(images/state_loadS.png)}
+  .images.state_solor{background-image:url(images/state_solor.png)}
+  .images.state_spf5000{background-image:url(images/state_spf5000.png)}
   
-  .icon.horizontal {
-    top: calc(var(--vertical-center) - (var(--icon-size) / 2));
+  .images.horizontal {
+    top: calc(var(--vertical-center) - (80px / 2));
   }
   
-  .icon.vertical {
-    left: calc(var(--horizontal-center) - (var(--icon-size) / 2));
+  .images.vertical {
+    left: calc(var(--horizontal-center) - (80px / 2));
+  }
+
+  .images.inv {
+    top: 200px;
+    left: 260px;
   }
   
-  .icon.top {
-    top: -4px;
+  .images.top {
+    top: 0px;
   }
   
-  .icon.bottom {
+  .images.bottom {
     bottom: -3px;
   }
   
-  .icon.left {
+  .images.left {
     left: 0px;
   }
   
-  .icon.right {
+  .images.right {
     right: 0px;
   }
   
@@ -88,9 +110,9 @@
     font-family: var(--font-primary);
     font-weight: bold;
     font-size: var(--font-size-small);
-    border: 2px solid;
-    border-color: var(--default-color);
-    border-radius: 3px;
+    /* border: 2px solid; */
+    /* border-color: var(--default-color); */
+    /* border-radius: 3px; */
     padding: 3px;
     text-align: center;
     white-space: nowrap;
@@ -99,23 +121,23 @@
   }
   
   #home-label {
-    left: 20px;
-    top: 10px;
+    left: 120px;
+    top: 40px;
   }
   
   #solar-label {
-    left: 20px;
-    bottom: 20px;
+    left: 50px;
+    bottom: 120px;
   }
   
   #battery-label {
-    left: 20px;
-    bottom: 20px;
+    left: 50px;
+    bottom: -90px;
   }
   
   #grid-label {
-    right: 20px;
-    bottom: 20px;
+    right: 100px;
+    bottom: -75px;
   }
   
   /* ****************************************
@@ -128,6 +150,10 @@
   
   .line.active {
     background-color: var(--active-color);
+  }
+
+  .line.vertical.top {
+    top: 85px;
   }
   
   .line.vertical {
@@ -145,7 +171,7 @@
   
   .line.vertical.down {
     position: absolute;
-    bottom: var(--line-margin);
+    bottom: 95px;
   }
   
   .line.horizontal {
@@ -157,12 +183,12 @@
   
   .line.horizontal.left {
     position: absolute;
-    left: var(--line-margin);
+    left: 95px;
   }
   
   .line.horizontal.right {
     position: absolute;
-    right: var(--line-margin);
+    right: 130px;
   }
   
   /* ****************************************

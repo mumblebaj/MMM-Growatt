@@ -66,6 +66,15 @@ Module.register("MMM-Growatt", {
         }, nextUpdate)
     },
 
+    socketNotificationReceived: function(notification, payload) {
+        var self = this
+        // Log.log(payload)
+        if (notification === "GROWATT_DATA") {
+            this.growattData = payload
+            this.updateDom()
+        }
+    },
+
     getDom: function() {
         const wrapper = document.createElement("div");
         wrapper.id = "energymonitor-wrapper";
@@ -78,7 +87,6 @@ Module.register("MMM-Growatt", {
         const solarLine = this.generateSolarLine();
         wrapper.appendChild(solarLine);
 
-        const homeLine = this.generateHomeLine();
         wrapper.appendChild(homeLine);
 
         const gridLine = this.generateGridLine();
@@ -93,64 +101,64 @@ Module.register("MMM-Growatt", {
     addIcons: function(wrapper) {
         // Solar Icon
         const solarPanel = document.createElement("div");
-        solarPanel.className = "icon vertical top";
+        solarPanel.className = "images vertical top";
 
         const solarPanelIcon = document.createElement("i");
-        solarPanelIcon.className = this.config.iconCssClasses.solor;
+        solarPanelIcon.className = "images state_solor";
         solarPanel.appendChild(solarPanelIcon);
         wrapper.appendChild(solarPanel);
 
         // home icon
         const home = document.createElement("div");
-        home.className = "icon horizontal right";
+        home.className = "images horizontal right";
 
         const homeIcon = document.createElement("i");
-        homeIcon.className = this.config.iconCssClasses.load;
+        homeIcon.className = "images state_load";
         home.appendChild(homeIcon);
         wrapper.appendChild(home);
 
         // grid icon
         const grid = document.createElement("div");
-        grid.className = "icon horizontal left";
+        grid.className = "images horizontal left";
 
         const gridIcon = document.createElement("i");
-        gridIcon.className = this.config.iconCssClasses.grid;
+        gridIcon.className = "images state_grid";
         grid.appendChild(gridIcon);
         wrapper.appendChild(grid);
 
         // battery icon
         const battery = document.createElement("div");
-        battery.className = "icon vertical bottom";
+        battery.className = "images vertical bottom";
 
         const batteryIcon = document.createElement("i");
-        batteryIcon.className = this.config.iconCssClasses.battery;
+        batteryIcon.className = "images state_bat_null";
         battery.appendChild(batteryIcon);
         wrapper.appendChild(battery);
 
         // inverter icon
         const inverter = document.createElement("div");
-        inverter.className = "icon horizontal center";
+        inverter.className = "images inv";
 
         const inverterIcon = document.createElement("i");
-        inverterIcon.className = this.config.iconCssClasses.inverter;
+        inverterIcon.className = "images state_spf5000";
         inverter.appendChild(inverterIcon);
         wrapper.appendChild(inverter);
 
     },
 
     generateSolarLine: function() {
-        Log.info(this.payload)
         const solarLine = document.createElement("div");
         solarLine.classList.add("line", "vertical", "top");
         
         const solarLabel = document.createElement("div");
         solarLabel.id = "solar-label";
         solarLabel.classList.add("label");
-        solarLabel.innerHTML = `Solar Line Data`; //${this.getWattString(this.currentData.solar)} <br>
-        solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
+        var ppvData = parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2);
+        solarLabel.innerHTML =  `Solar: ${ppvData}W`;
+        // solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
         solarLine.appendChild(solarLabel);
 
-        if(this.growattData.ppv1 > 0) {
+        if(ppvData > 0) {
             solarLine.classList.add("active");
 
             const solarArrowOut = document.createElement("i");
@@ -166,20 +174,20 @@ Module.register("MMM-Growatt", {
     generateHomeLine: function() {
         this.calculateHomeConsumption();
         const homeLine = document.createElement("div");
-        homeLine.classList.add("line", "vertical", "up");
+        homeLine.classList.add("line", "horizontal", "right");
         
         const homeLabel = document.createElement("div");
         homeLabel.id = "home-label";
         homeLabel.classList.add("label");
-        homeLabel.innerHTML = `Home Line Data`; //${this.getWattString(this.currentData.home)}<br>
-        homeLabel.innerHTML += this.translate("HOME_CONSUMPTION");
+        homeLabel.innerHTML = `${this.growattData[0].consumptionPower}W/${this.growattData[0].rateVA}VA`;
+        // homeLabel.innerHTML += this.translate("HOME_CONSUMPTION");
         homeLine.appendChild(homeLabel);
 
-        if(this.growattData.consumptionPower > 0) {
+        if(this.growattData[0].consumptionPower > 0) {
             homeLine.classList.add("active");
 
             const homeArrowIn = document.createElement("div");
-            homeArrowIn.classList.add("arrow", "up", "active");
+            homeArrowIn.classList.add("arrow", "right", "active");
             homeLine.appendChild(homeArrowIn);
         } else {
             homeLine.classList.add("dimmed");
@@ -190,34 +198,27 @@ Module.register("MMM-Growatt", {
 
     generateGridLine: function() {
         const gridLine = document.createElement("div");
-        gridLine.classList.add("line", "horizontal", "right");
+        gridLine.classList.add("line", "horizontal", "left");
                 
-        if(this.growattData.gridPower !== 0)
+        if(this.growattData[0].gridPower > 0)
             gridLine.classList.add("active");
 
         const gridLabel = document.createElement("div");
         gridLabel.id = "grid-label";
         gridLabel.classList.add("label");
-        gridLabel.innerHTML = `Grid Line Data`; //${this.getWattString(Math.abs(this.currentData.grid))}<br>
+        gridLabel.innerHTML = `${this.growattData[0].gridPower}W`; 
         gridLine.appendChild(gridLabel);
 
         // Positive value means feeding to grid
-        if(this.growattData.gridPower > 0) {
-            gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
-            gridLabel.classList.add("font-green");
+        if(this.growattData[0].gridPower < 0) {
+            // gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
+            gridLabel.classList.add("font-red");
 
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
-        } else if(this.growattData.gridPower < 0) {
-            gridLabel.innerHTML += this.translate("GRID_CONSUMPTION");
-            gridLabel.classList.add("font-red");
-
-            const gridArrowIn = document.createElement("div");
-            gridArrowIn.classList.add("arrow", "left", "active");
-            gridLine.appendChild(gridArrowIn);
         } else {
-            gridLabel.innerHTML += this.translate("GRID_IDLE");
+            // gridLabel.innerHTML += this.translate("GRID_IDLE");
             gridLine.classList.add("dimmed");
         }
 
@@ -231,40 +232,40 @@ Module.register("MMM-Growatt", {
         const batteryLabel = document.createElement("div");
         batteryLabel.id = "battery-label";
         batteryLabel.classList.add("label");
-        batteryLabel.innerHTML = `Battery Line Data`; //${this.getWattString(Math.abs(this.currentData.battery))}<br>
+        batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
         batteryLine.appendChild(batteryLabel);
 
-        if(this.payload.stateOfCharge !== 0)
+        if(this.growattData[0].discharging !== 0)
             batteryLine.classList.add("active");
 
-        // Positive value means charging battery
-        if(this.payload.stateOfCharge > 0) {
-            batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
-            batteryLabel.classList.add("font-green");
+        // Negative value means charging battery
+        if(this.growattData[0].discharging < 0) {
+            // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
+            batteryLabel.classList.add("font-red");
 
             const batteryArrowIn = document.createElement("i");
             batteryArrowIn.classList.add("fas", "fa-caret-down", "arrow", "down", "active");
             batteryLine.appendChild(batteryArrowIn);
-        } else if(this.paylod.stateOfCharge < 0) {
-            batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
+        } else if(`${this.growattData[0].stateOfCharge}` > 35 & `${this.growattData[0].discharging}` > 0) {
+            // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
+            batteryLabel.classList.add("font-green");
+
+            const batteryArrowOut = document.createElement("i");
+            batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active");
+            batteryLine.appendChild(batteryArrowOut);
+        } else if(`${this.growattData[0].stateOfCharge}` < 35 & `${this.growattData[0].discharging}` > 0) {
+            // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
             batteryLabel.classList.add("font-red");
 
             const batteryArrowOut = document.createElement("i");
             batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active");
             batteryLine.appendChild(batteryArrowOut);
-        } else {
-            batteryLabel.innerHTML += this.translate("BATTERY_IDLE");
+        }
+            else {
+            // batteryLabel.innerHTML += this.translate("BATTERY_IDLE");
             batteryLine.classList.add("dimmed");
         }
 
         return batteryLine;
-    },
-
-    socketNotificationReceived: function(notification, payload) {
-        var self = this
-        if (notification === "GROWATT_DATA") {
-            this.growattData = payload
-            this.updateDom()
-        }
     }
 })
