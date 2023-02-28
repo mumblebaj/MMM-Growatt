@@ -2,14 +2,7 @@ Module.register("MMM-Growatt", {
 
     defaults: {
         title: "MMM-Growatt",
-        updateInterval: 1000*60*60,
-        iconCssClasses: {
-            solor: "icons/grwt_solor.png",
-            grid: "icons/grwt_grid.png",
-            battery: "icons/grwt_bat.png",
-            load: "icons/grwt_load.png",
-            inverter: "icons/grwt_inverter.png"
-        }
+        updateInterval: 1000*60*60
     },
 
     getStyles: function() {
