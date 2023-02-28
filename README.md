@@ -1,6 +1,6 @@
 # MMM-Growatt
 
-A [MagicMirror²](https://magicmirror.builders) module to display Growatt Power Plant Data from [Growatt](https://server.growatt.com.
+A [MagicMirror²](https://magicmirror.builders) module to display Growatt Power Plant Data from [Growatt](https://server.growatt.com).
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
