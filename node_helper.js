@@ -48,8 +48,6 @@ module.exports = NodeHelper.create({
 
         var growattDataParsed = plantDataFiltered;
 
-        console.log(growattDataParsed);
-
         this.sendSocketNotification('GROWATT_DATA', growattDataParsed)
     },
 

@@ -61,7 +61,6 @@ Module.register("MMM-Growatt", {
 
     socketNotificationReceived: function(notification, payload) {
         var self = this
-        // Log.log(payload)
         if (notification === "GROWATT_DATA") {
             this.growattData = payload
             this.updateDom()
