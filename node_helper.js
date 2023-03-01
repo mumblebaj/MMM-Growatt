@@ -15,6 +15,7 @@ module.exports = NodeHelper.create({
         plantDataFiltered = [];
 
         const plantId = payload.plantId;
+        const loggerId = payload.dataLoggerId;
 
         plantDataFiltered.push({
             "plantName": d[plantId].plantName,
@@ -24,13 +25,13 @@ module.exports = NodeHelper.create({
             "inverterPower": d[plantId].plantData.nominalPower,
             "treesSaved": d[plantId].plantData.tree,
             "coalSaved": d[plantId].plantData.coal,
-            "ppv1": d[plantId].devices.RKG8CGL0JP.statusData.ppv1,
-            "ppv2": d[plantId].devices.RKG8CGL0JP.statusData.ppv2,
-            "gridPower": d[plantId].devices.RKG8CGL0JP.statusData.gridPower,
-            "discharging": d[plantId].devices.RKG8CGL0JP.historyLast.pBat,
-            "stateOfCharge": d[plantId].devices.RKG8CGL0JP.historyLast.capacity,
-            "consumptionPower": d[plantId].devices.RKG8CGL0JP.historyLast.outPutPower,
-            "rateVA": d[plantId].devices.RKG8CGL0JP.historyLast.rateVA
+            "ppv1": d[plantId].devices[loggerId].statusData.ppv1,
+            "ppv2": d[plantId].devices[loggerId].statusData.ppv2,
+            "gridPower": d[plantId].devices[loggerId].statusData.gridPower,
+            "discharging": d[plantId].devices[loggerId].historyLast.pBat,
+            "stateOfCharge": d[plantId].devices[loggerId].historyLast.capacity,
+            "consumptionPower": d[plantId].devices[loggerId].historyLast.outPutPower,
+            "rateVA": d[plantId].devices[loggerId].historyLast.rateVA
         })
         return plantDataFiltered;
     },

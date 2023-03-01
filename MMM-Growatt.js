@@ -2,7 +2,10 @@ Module.register("MMM-Growatt", {
 
     defaults: {
         title: "MMM-Growatt",
-        updateInterval: 1000*60*60
+        updateInterval: 1000*60*60,
+        username: "username",
+        password: "password",
+        dataLoggerId: "loggerId"
     },
 
     getStyles: function() {
