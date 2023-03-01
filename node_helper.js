@@ -42,6 +42,9 @@ module.exports = NodeHelper.create({
         
         let getAllPlantData = await growatt.getAllPlantData(options).catch(e => {console.log(e)})
 
+        let logout = await growatt.logout().catch(e => {console.log(e)})
+        console.log('logout:',logout)
+
         var plantData = getAllPlantData;
 
         var parserResponse = this.deconstructPlantData(plantData, payload)
