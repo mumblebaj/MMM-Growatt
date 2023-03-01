@@ -20,7 +20,7 @@ Module.register("MMM-Growatt", {
     start: function() {
         Log.info(`Starting module: ${this.name}`);
 
-        this.growattData = null;
+        // this.growattData = null;
 
         this.getGrowattData();
         this.scheduleUpdate();
