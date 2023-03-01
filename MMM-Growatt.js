@@ -63,8 +63,9 @@ Module.register("MMM-Growatt", {
         var self = this
         if (notification === "GROWATT_DATA") {
             this.growattData = payload
-            this.updateDom()
+            
         }
+        this.updateDom()
     },
 
     getDom: function() {
@@ -79,6 +80,7 @@ Module.register("MMM-Growatt", {
         const solarLine = this.generateSolarLine();
         wrapper.appendChild(solarLine);
 
+        const homeLine = this.generateHomeLine();
         wrapper.appendChild(homeLine);
 
         const gridLine = this.generateGridLine();
@@ -164,7 +166,6 @@ Module.register("MMM-Growatt", {
     },
 
     generateHomeLine: function() {
-        this.calculateHomeConsumption();
         const homeLine = document.createElement("div");
         homeLine.classList.add("line", "horizontal", "right");
         
