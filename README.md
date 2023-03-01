@@ -36,11 +36,12 @@ Add the module to the modules array in the `config/config.js` file:
                 username: "username",
                 password: "password",
                 plantId: "plantId", // Can be obtained from the Growatt site by checking your Plant information. This can be accessed from the left side of the screen
-                updateInterval: 1000*60*30 //Update every 30 minutes
+                updateInterval: 1000*60*30 ,//Update every 30 minutes
+                dataLoggerId: "dataLoggerId" //Can be found under Input Search Number
         }
 },
 ````
-![Example](images/image-2.png) 
+![Example](images/image-2.png) ![Example](images/image-3.png) 
 
 ## Updating
 
