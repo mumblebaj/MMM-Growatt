@@ -41,7 +41,7 @@ Add the module to the modules array in the `config/config.js` file:
         }
 },
 ````
-![Example](images/image-2.png) ![Example](images/image-3.png) 
+![Example](images/image-4.png) ![Example](images/image-3.png) 
 
 ## Updating
 
