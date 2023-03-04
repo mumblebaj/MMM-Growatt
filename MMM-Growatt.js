@@ -73,7 +73,7 @@ Module.register("MMM-Growatt", {
 
     getDom: function() {
         const wrapper = document.createElement("div");
-        wrapper.id = "energymonitor-wrapper";
+        wrapper.id = "growatt-wrapper";
         wrapper.style.setProperty("--width", "600px");
         wrapper.style.setProperty("--height", "500px");
         wrapper.style.setProperty("--line-width", "7px");
