@@ -2,7 +2,7 @@
 *    Main wrapper and helper classes
 * ****************************************/
 
-#energymonitor-wrapper {
+#growatt-wrapper {
     --width: 600px;
     --height: 500px;
     --line-width: 8px;
@@ -32,6 +32,11 @@
   .active {
     color: #0cf747;
     background-color: #08f310;
+  }
+
+  .gridactive {
+    color: red;
+    background-color: red;
   }
   
   .font-green {

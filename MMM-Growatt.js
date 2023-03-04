@@ -197,7 +197,7 @@ Module.register("MMM-Growatt", {
         gridLine.classList.add("line", "horizontal", "left");
                 
         if(this.growattData[0].gridPower > 0)
-            gridLine.classList.add("active");
+            gridLine.classList.add("gridactive");
 
         const gridLabel = document.createElement("div");
         gridLabel.id = "grid-label";
