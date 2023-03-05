@@ -34,6 +34,16 @@
     background-color: #08f310;
   }
 
+  .active-amber {
+    color: orange;
+    background-color: orange;
+  }
+
+  .active-red {
+    color: red;
+    background-color: red;
+  }
+
   .gridactive {
     color: red;
     background-color: red;
@@ -45,6 +55,10 @@
   
   .font-red {
     color: #E09690;
+  }
+
+  .font-amber {
+    color: orange !important;
   }
   
   /* ****************************************

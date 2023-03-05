@@ -237,24 +237,24 @@ Module.register("MMM-Growatt", {
         // Negative value means charging battery
         if(this.growattData[0].discharging < 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
-            batteryLabel.classList.add("font-red");
+            batteryLabel.classList.add("font-green");
 
             const batteryArrowIn = document.createElement("i");
             batteryArrowIn.classList.add("fas", "fa-caret-down", "arrow", "down", "active");
             batteryLine.appendChild(batteryArrowIn);
         } else if(`${this.growattData[0].stateOfCharge}` > 35 & `${this.growattData[0].discharging}` > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
-            batteryLabel.classList.add("font-green");
+            batteryLabel.classList.add("font-amber");
 
             const batteryArrowOut = document.createElement("i");
-            batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active");
+            batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active-amber");
             batteryLine.appendChild(batteryArrowOut);
         } else if(`${this.growattData[0].stateOfCharge}` < 35 & `${this.growattData[0].discharging}` > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
             batteryLabel.classList.add("font-red");
 
             const batteryArrowOut = document.createElement("i");
-            batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active");
+            batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active-red");
             batteryLine.appendChild(batteryArrowOut);
         }
             else {
