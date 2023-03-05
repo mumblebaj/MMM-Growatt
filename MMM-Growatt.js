@@ -251,6 +251,7 @@ Module.register("MMM-Growatt", {
             batteryLine.appendChild(batteryArrowOut);
         } else if(`${this.growattData[0].stateOfCharge}` < 35 & `${this.growattData[0].discharging}` > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
+            batteryLine.classList.add("active-red");
             batteryLabel.classList.add("font-red");
 
             const batteryArrowOut = document.createElement("i");
@@ -259,6 +260,7 @@ Module.register("MMM-Growatt", {
         }
             else {
             // batteryLabel.innerHTML += this.translate("BATTERY_IDLE");
+            batteryLabel.classList.add("font-green");
             batteryLine.classList.add("dimmed");
         }
 
