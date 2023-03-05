@@ -231,8 +231,8 @@ Module.register("MMM-Growatt", {
         batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
         batteryLine.appendChild(batteryLabel);
 
-        if(this.growattData[0].discharging !== 0)
-            batteryLine.classList.add("active");
+        if(this.growattData[0].discharging > 0)
+            batteryLine.classList.add("active-amber");
 
         // Negative value means charging battery
         if(this.growattData[0].discharging < 0) {

@@ -171,6 +171,14 @@
     background-color: var(--active-color);
   }
 
+  .line.active-amber {
+    background-color: orange;
+  }
+
+  .line.active-red {
+    background-color: red;
+  }
+
   .line.vertical.top {
     top: 85px;
   }
@@ -225,6 +233,14 @@
   }
   
   .arrow.active {
+    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
+  }
+
+  .arrow.active-amber {
+    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
+  }
+
+  .arrow.active-red {
     filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
   }
   
