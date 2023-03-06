@@ -66,9 +66,8 @@ Module.register("MMM-Growatt", {
         var self = this
         if (notification === "GROWATT_DATA") {
             this.growattData = payload
-            
+            this.updateWrapper(this.growattData);
         }
-        this.updateDom()
     },
 
     getDom: function() {
@@ -78,16 +77,25 @@ Module.register("MMM-Growatt", {
         wrapper.style.setProperty("--height", "500px");
         wrapper.style.setProperty("--line-width", "7px");
 
+        return wrapper;
+    },
+
+    updateWrapper: function(growattData){
+        let wrapper = document.getElementById("growatt-wrapper");
+        while (wrapper.hasChildNodes()) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+
         this.addIcons(wrapper);
 
         const solarLine = this.generateSolarLine();
         wrapper.appendChild(solarLine);
 
-        const homeLine = this.generateHomeLine();
-        wrapper.appendChild(homeLine);
-
         const gridLine = this.generateGridLine();
         wrapper.appendChild(gridLine);
+
+        const homeLine = this.generateHomeLine();
+        wrapper.appendChild(homeLine);
 
         const batteryLine = this.generateBatteryLine();
         wrapper.appendChild(batteryLine);
@@ -206,8 +214,9 @@ Module.register("MMM-Growatt", {
         gridLine.appendChild(gridLabel);
 
         // Positive value means feeding to grid
-        if(this.growattData[0].gridPower < 0) {
+        if(this.growattData[0].gridPower > 0) {
             // gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
+            gridLine.classList.add("active-red")
             gridLabel.classList.add("font-red");
 
             const gridArrowOut = document.createElement("div");

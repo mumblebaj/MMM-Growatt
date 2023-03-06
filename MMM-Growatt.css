@@ -64,14 +64,6 @@
   /* ****************************************
   *    Icons
   * ****************************************/
-  
-  .icon {
-    position: absolute;
-    font-size: var(--images-size);
-    color: var(--default-color);
-    display: inline-block;
-    text-align: center;
-  }
 
   .images {
     position: absolute;
