@@ -237,6 +237,7 @@ Module.register("MMM-Growatt", {
         // Negative value means charging battery
         if(this.growattData[0].discharging < 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
+            batteryLine.classList.add("active");
             batteryLabel.classList.add("font-green");
 
             const batteryArrowIn = document.createElement("i");
