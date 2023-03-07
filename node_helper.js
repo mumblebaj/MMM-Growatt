@@ -15,7 +15,7 @@ module.exports = NodeHelper.create({
         plantDataFiltered = [];
 
         const plantId = payload.plantId;
-        const loggerId = payload.dataLoggerId;
+        const loggerId = payload.deviceSerial;
 
         plantDataFiltered.push({
             "plantName": d[plantId].plantName,

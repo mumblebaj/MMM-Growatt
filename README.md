@@ -37,8 +37,8 @@ Add the module to the modules array in the `config/config.js` file:
                 password: "password",
                 plantId: "plantId", // Can be obtained from the Growatt site by checking your Plant information. This can be accessed from the left side of the screen
                 updateInterval: 1000*60*30 ,//Update every 30 minutes
-                dataLoggerId: "dataLoggerId" //Can be found under Input Search Number. This would be the logger you want track. No support for multiple loggers yet.
-        }
+                deviceSerial: "deviceSerial" //This is the device serial number. Can be found under Input Search Number. 
+                        }
 },
 ````
 ![Example](images/image-4.png) ![Example](images/image-3.png) 

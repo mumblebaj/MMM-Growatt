@@ -5,7 +5,7 @@ Module.register("MMM-Growatt", {
         updateInterval: 1000*60*60,
         username: "username",
         password: "password",
-        dataLoggerId: "loggerId"
+        deviceSerial: "deviceSerial"
     },
 
     getStyles: function() {
