@@ -37,7 +37,7 @@ Module.register("MMM-Growatt", {
         Log.info('Resuming module ' + this.name);
         Log.debug('with config: ' + JSON.stringify(this.config));
         this.suspend = false;
-        this.updateDom();
+        this.updateWrapper(this.growattData);
     },
 
     suspend: function() {
