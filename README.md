@@ -7,8 +7,9 @@ A [MagicMirror²](https://magicmirror.builders) module to display Growatt Power 
 ![Example](images/image-5.png) 
 
 ## Dependencies
-- growatt
-- Requires v2.21.0. Built and tested on this version. May work on earlier versions but not tested nor supported.
+- [growatt](https://www.npmjs.com/package/growatt)
+- Requires MagicMirror² v2.21.0. Built and tested on this version. May work on earlier versions but not tested nor supported.
+- Requires that you have an account on [Growatt.com](https://server.growatt.com/login)
 
 ## Installation
 
@@ -30,7 +31,7 @@ Add the module to the modules array in the `config/config.js` file:
 ````javascript
         {
             module: "MMM-Growatt",
-            position: "middle_center",
+            position: "middle_center", //Works best at middle_center. May not display all that well in other positions
             disabled: false,
             config: {
                 username: "username",
