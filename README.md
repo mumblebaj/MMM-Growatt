@@ -4,7 +4,7 @@ A [MagicMirror²](https://magicmirror.builders) module to display Growatt Power 
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-![Example](images/image-6.png)
+![Example](images/image-5.png)
 
 ## Dependencies
 - [growatt](https://www.npmjs.com/package/growatt)
