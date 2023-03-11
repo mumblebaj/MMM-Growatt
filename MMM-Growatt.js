@@ -250,7 +250,7 @@ Module.register("MMM-Growatt", {
         const dateTimeLabel = document.createElement("div");
         dateTimeLabel.id = "static-label";
         dateTimeLabel.classList.add("label");
-        dateTimeLabel.innerHTML = `Static Taken at: <br> ${this.growattData[0].staticTakenAt}`;
+        dateTimeLabel.innerHTML = `Last Update: <br> ${this.growattData[0].staticTakenAt}`;
         batteryLine.appendChild(dateTimeLabel);
 
         if(this.growattData[0].discharging > 0)
