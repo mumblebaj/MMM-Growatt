@@ -1,7 +1,7 @@
 var NodeHelper = require('node_helper')
 var api = require('growatt')
 
-const options = {plantData:true,deviceData:true,weather:false,totalData:false,statusData:true,
+const options = {plantData:true,weather:false,totalData:false,statusData:true,deviceData:true,
     deviceType:false,historyLast:true,historyAll:false}
 
 module.exports = NodeHelper.create({
