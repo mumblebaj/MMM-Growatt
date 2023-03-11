@@ -166,7 +166,7 @@ Module.register("MMM-Growatt", {
         const infoLabel = document.createElement("div");
         infoLabel.id = "info-label";
         infoLabel.classList.add("label");
-        infoLabel.innerHTML = `Deforestation: ${this.growattData[0].treesSaved} saved <br> Standard Coal Saved: ${this.growattData[0].coalSaved}KG <br> Standard
+        infoLabel.innerHTML = `Deforestation: ${this.growattData[0].treesSaved} trees saved <br> Standard Coal Saved: ${this.growattData[0].coalSaved}KG <br> Standard
         Co₂ Reduced: ${this.growattData[0].coalSaved}KG`;
         solarLine.appendChild(infoLabel);
 
