@@ -163,6 +163,12 @@ Module.register("MMM-Growatt", {
         // solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
         solarLine.appendChild(solarLabel);
 
+        const infoLabel = document.createElement("div");
+        infoLabel.id = "info-label";
+        infoLabel.classList.add("label");
+        infoLabel.innerHTML = `Trees Saved: ${this.growattData[0].treesSaved} <br> Coal Saved: ${this.growattData[0].coalSaved}`;
+        solarLine.appendChild(infoLabel);
+
         if(ppvData > 0) {
             solarLine.classList.add("active");
 
@@ -239,6 +245,12 @@ Module.register("MMM-Growatt", {
         batteryLabel.classList.add("label");
         batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
         batteryLine.appendChild(batteryLabel);
+
+        const dateTimeLabel = document.createElement("div");
+        dateTimeLabel.id = "static-label";
+        dateTimeLabel.classList.add("label");
+        dateTimeLabel.innerHTML = `Static Taken at: <br> ${this.growattData[0].staticTakenAt}`;
+        batteryLine.appendChild(dateTimeLabel);
 
         if(this.growattData[0].discharging > 0)
             batteryLine.classList.add("active-amber");

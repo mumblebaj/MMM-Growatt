@@ -150,6 +150,18 @@
     right: 100px;
     bottom: -75px;
   }
+
+  #static-label {
+    right: 200px;
+    bottom: -90px;
+    font-size: small;
+  }
+
+  #info-label {
+    right: 200px;
+    bottom: 120px;
+    font-size: medium;
+  }
   
   /* ****************************************
   *    Lines

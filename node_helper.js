@@ -1,7 +1,7 @@
 var NodeHelper = require('node_helper')
 var api = require('growatt')
 
-const options = {plantData:true,deviceData:false,weather:false,totalData:false,statusData:true,
+const options = {plantData:true,deviceData:true,weather:false,totalData:false,statusData:true,
     deviceType:false,historyLast:true,historyAll:false}
 
 module.exports = NodeHelper.create({
@@ -31,7 +31,8 @@ module.exports = NodeHelper.create({
             "discharging": d[plantId].devices[loggerId].historyLast.pBat,
             "stateOfCharge": d[plantId].devices[loggerId].historyLast.capacity,
             "consumptionPower": d[plantId].devices[loggerId].historyLast.outPutPower,
-            "rateVA": d[plantId].devices[loggerId].historyLast.rateVA
+            "rateVA": d[plantId].devices[loggerId].historyLast.rateVA,
+            "staticTakenAt": d[ plantId].devices[loggerId].deviceData.lastUpdateTime
         })
         return plantDataFiltered;
     },
