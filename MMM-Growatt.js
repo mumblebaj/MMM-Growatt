@@ -23,7 +23,7 @@ Module.register("MMM-Growatt", {
     start: function() {
         Log.info(`Starting module: ${this.name}`);
 
-        // this.growattData = null;
+        suspended = false;
 
         this.getGrowattData();
         this.scheduleUpdate();
@@ -36,13 +36,13 @@ Module.register("MMM-Growatt", {
     resume: function() {
         Log.info('Resuming module ' + this.name);
         Log.debug('with config: ' + JSON.stringify(this.config));
-        this.suspend = false;
+        this.suspended = false;
         this.updateWrapper(this.growattData);
     },
 
     suspend: function() {
         Log.info('Suspending module ' + this.name);
-        this.suspend = true;
+        this.suspended = true;
     },
 
     getGrowattData: function() {
