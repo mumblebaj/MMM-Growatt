@@ -272,7 +272,7 @@ Module.register("MMM-Growatt", {
             const batteryArrowOut = document.createElement("i");
             batteryArrowOut.classList.add("fas", "fa-caret-up", "arrow", "up", "active-amber");
             batteryLine.appendChild(batteryArrowOut);
-        } else if(`${this.growattData[0].stateOfCharge}` < 35 & `${this.growattData[0].discharging}` > 0) {
+        } else if(`${this.growattData[0].stateOfCharge}` <= 35 & `${this.growattData[0].discharging}` > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_DISCHARGING");
             batteryLine.classList.add("active-red");
             batteryLabel.classList.add("font-red");
