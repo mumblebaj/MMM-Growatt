@@ -7,7 +7,7 @@ const options = {
 }
 
 module.exports = NodeHelper.create({
-    requiresVersion: '2.21.0',
+    requiresVersion: '2.22.0',
 
     start: function () {
         console.log('Starting node helper for ' + this.name)
