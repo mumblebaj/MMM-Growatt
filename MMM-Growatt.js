@@ -154,6 +154,8 @@ Module.register("MMM-Growatt", {
     generateSolarLine: function() {
         const solarLine = document.createElement("div");
         solarLine.classList.add("line", "vertical", "top");
+        let ppv1 = this.growattData[0].ppv1 ? this.growattData[0].ppv1 : 0
+        let ppv2 = this.growattData[0].ppv2 ? this.growattData[0].ppv2 : 0
         
         const solarLabel = document.createElement("div");
         solarLabel.id = "solar-label";
