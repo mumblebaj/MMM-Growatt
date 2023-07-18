@@ -37,9 +37,10 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
-                plantId: "plantId", // Can be obtained from the Growatt site by checking your Plant information. This can be accessed from the left side of the screen
-                updateInterval: 1000*60*30 ,//Update every 30 minutes
-                deviceSerial: "deviceSerial" //This is the device serial number. Can be found under Input Search Number. 
+                ~~plantId: "plantId",~~ // This is no longer required
+                ~~deviceSerial: "deviceSerial",~~ //This is no longer required. 
+                updateInterval: 1000*60*30 //Update every 30 minutes
+                
                         }
 },
 ````
@@ -55,4 +56,8 @@ git pull
 npm install
 
 ```` 
+## Changes
+Updated module to no longer require user to specify plantId and deviceSerial. The values will be automatically obtained.
 
+### Future updates
+Investigate adding multiple device capabilities.
