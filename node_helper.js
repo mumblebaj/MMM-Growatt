@@ -18,9 +18,6 @@ module.exports = NodeHelper.create({
 
         const plantId = keys;
         const loggerId = deviceSerial;
-        let ppv1 = d[plantId].devices[loggerId].statusData.ppv1 ? d[plantId].devices[loggerId].statusData.ppv1 : 0;
-        let ppv2 = d[plantId].devices[loggerId].statusData.ppv2 ? d[plantId].devices[loggerId].statusData.ppv2 : 0;
-
 
         plantDataFiltered.push({
             "plantName": d[plantId].plantName,
@@ -30,8 +27,8 @@ module.exports = NodeHelper.create({
             "inverterPower": d[plantId].plantData.nominalPower,
             "treesSaved": d[plantId].plantData.tree,
             "coalSaved": d[plantId].plantData.coal,
-            "ppv1": ppv1,
-            "ppv2": ppv2,
+            "ppv1": d[plantId].devices[loggerId].statusData.ppv1,
+            "ppv2": d[plantId].devices[loggerId].statusData.ppv2,
             "gridPower": d[plantId].devices[loggerId].statusData.gridPower,
             "discharging": d[plantId].devices[loggerId].statusData.batPower,
             "stateOfCharge": d[plantId].devices[loggerId].statusData.capacity,
