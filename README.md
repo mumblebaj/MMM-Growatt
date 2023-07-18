@@ -37,8 +37,6 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
-                ~~plantId: "plantId",~~ // This is no longer required
-                ~~deviceSerial: "deviceSerial",~~ //This is no longer required. 
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
                         }
