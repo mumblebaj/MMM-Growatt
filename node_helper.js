@@ -13,11 +13,11 @@ module.exports = NodeHelper.create({
         console.log('Starting node helper for ' + this.name)
     },
 
-    deconstructPlantData: function (d, payload) {
+    deconstructPlantData: function (keys, deviceSerial, d, payload) {
         plantDataFiltered = [];
 
-        const plantId = payload.plantId;
-        const loggerId = payload.deviceSerial;
+        const plantId = keys;
+        const loggerId = deviceSerial;
         let ppv1 = d[plantId].devices[loggerId].statusData.ppv1 ? d[plantId].devices[loggerId].statusData.ppv1 : 0;
         let ppv2 = d[plantId].devices[loggerId].statusData.ppv2 ? d[plantId].devices[loggerId].statusData.ppv2 : 0;
 
@@ -44,6 +44,8 @@ module.exports = NodeHelper.create({
     },
 
     getGrowattData: async function (payload) {
+        let keys = "";
+        let deviceSerial = "";
         const growatt = new api({})
         let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
         console.log('login: ', login)
@@ -52,10 +54,19 @@ module.exports = NodeHelper.create({
 
         let logout = await growatt.logout().catch(e => { console.log(e) })
         console.log('logout:', logout)
+        
+        // Get the Plant ID here
+        keys = Object.keys(getAllPlantData);
+
+        // Get the device serial Number
+        keys.forEach(key => {
+                let { devices, ...rest } = getAllPlantData[key];
+                deviceSerial = Object.keys(devices);
+        })
 
         var plantData = getAllPlantData;
 
-        var parserResponse = this.deconstructPlantData(plantData, payload)
+        var parserResponse = this.deconstructPlantData(keys, deviceSerial, plantData, payload)
 
         var growattDataParsed = plantDataFiltered;
 
