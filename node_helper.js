@@ -105,6 +105,27 @@ module.exports = NodeHelper.create({
                     plantid: key,
                     data: { ...rest, devicesData }
                   })
+                  plantDataFiltered.push({
+                    "plantName": data[0].data.plantName,
+                    "country": data[0].data.plantData.country,
+                    "city": data[0].data.plantData.city,
+                    "accountName": data[0].data.plantData.accountName,
+                    "inverterPower": data[0].data.plantData.nominalPower,
+                    "treesSaved": data[0].data.plantData.tree,
+                    "coalSaved": data[0].data.plantData.coal,
+                    "ppv": data[0].data.devicesData[0].data.statusData.ppv,
+                    "ppv1": data[0].data.devicesData[0].data.statusData.pPv1,
+                    "ppv2": data[0].data.devicesData[0].data.statusData.pPv2,
+                    "ppv3": data[0].data.devicesData[0].data.statusData.pPv3,
+                    "ppv4": data[0].data.devicesData[0].data.statusData.pPv4,
+                    "importFromGrid": data[0].data.devicesData[0].data.statusData.pactouser,
+                    "exportToGrid": data[0].data.devicesData[0].data.statusData.pactogrid,
+                    "discharging": data[0].data.devicesData[0].data.statusData.pdisCharge,
+                    "charging": data[0].data.devicesData[0].data.statusData.chargePower,
+                    "stateOfCharge": data[0].data.devicesData[0].data.statusData.SOC,
+                    "consumptionPower": data[0].data.devicesData[0].data.statusData.pLocalLoad,
+                    "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime
+                  })
               }
         
               else if( devices[sn].growattType === "mix") {
