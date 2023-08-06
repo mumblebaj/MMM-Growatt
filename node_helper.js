@@ -13,36 +13,144 @@ module.exports = NodeHelper.create({
         console.log('Starting node helper for ' + this.name)
     },
 
-    deconstructPlantData: function (keys, deviceSerial, d, payload) {
+    deconstructPlantData: function (d, payload) {
         plantDataFiltered = [];
+        let keys = "";
+        let deviceSerial = "";
+        let data = [];
 
-        const plantId = keys;
-        const loggerId = deviceSerial;
+        // const plantId = keys;
+        // const loggerId = deviceSerial;
 
-        plantDataFiltered.push({
-            "plantName": d[plantId].plantName,
-            "country": d[plantId].plantData.country,
-            "city": d[plantId].plantData.city,
-            "accountName": d[plantId].plantData.accountName,
-            "inverterPower": d[plantId].plantData.nominalPower,
-            "treesSaved": d[plantId].plantData.tree,
-            "coalSaved": d[plantId].plantData.coal,
-            "ppv1": d[plantId].devices[loggerId].statusData.ppv1,
-            "ppv2": d[plantId].devices[loggerId].statusData.ppv2,
-            "gridPower": d[plantId].devices[loggerId].statusData.gridPower,
-            "discharging": d[plantId].devices[loggerId].statusData.batPower,
-            "stateOfCharge": d[plantId].devices[loggerId].statusData.capacity,
-            "consumptionPower": d[plantId].devices[loggerId].statusData.loadPower,
-            "rateVA": d[plantId].devices[loggerId].statusData.rateVA,
-            "loadPercentage": d[plantId].devices[loggerId].statusData.loadPrecent,
-            "staticTakenAt": d[plantId].devices[loggerId].deviceData.lastUpdateTime
-        })
+        keys = Object.keys(d);
+
+        keys.forEach(key => {
+            let { devices, ...rest } = d[key];
+            deviceSerial = Object.keys(devices);
+            // console.log("Key: ", deviceSerial);
+            let devicesData = [];
+            deviceSerial.forEach(sn => {
+              // console.log("SN: ", sn)
+              // console.log("Growatt Type: ", devices[sn].growattType)
+        
+              if( devices[sn].growattType === "storage") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+
+                  plantDataFiltered.push({
+                    "plantName": data[0].data.plantName,
+                    "country": data[0].data.plantData.country,
+                    "city": data[0].data.plantData.city,
+                    "accountName": data[0].data.plantData.accountName,
+                    "inverterPower": data[0].data.plantData.nominalPower,
+                    "treesSaved": data[0].data.plantData.tree,
+                    "coalSaved": data[0].data.plantData.coal,
+                    "ppv1": data[0].data.devicesData[0].data.statusData.ppv1,
+                    "ppv2": data[0].data.devicesData[0].data.statusData.ppv2,
+                    "gridPower": data[0].data.devicesData[0].data.statusData.gridPower,
+                    "discharging": data[0].data.devicesData[0].data.statusData.batPower,
+                    "stateOfCharge": data[0].data.devicesData[0].data.statusData.capacity,
+                    "consumptionPower": data[0].data.devicesData[0].data.statusData.loadPower,
+                    "rateVA": data[0].data.devicesData[0].data.statusData.rateVA,
+                    "loadPercentage": data[0].data.devicesData[0].data.statusData.loadPrecent,
+                    "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime
+                  })
+              }
+        
+              else if( devices[sn].growattType === "tlxh") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+                  plantDataFiltered.push({
+                    "plantName": data[0].data.plantName,
+                    "country": data[0].data.plantData.country,
+                    "city": data[0].data.plantData.city,
+                    "accountName": data[0].data.plantData.accountName,
+                    "inverterPower": data[0].data.plantData.nominalPower,
+                    "treesSaved": data[0].data.plantData.tree,
+                    "coalSaved": data[0].data.plantData.coal,
+                    "ppv": data[0].data.devicesData[0].data.statusData.ppv,
+                    "ppv1": data[0].data.devicesData[0].data.statusData.pPv1,
+                    "ppv2": data[0].data.devicesData[0].data.statusData.pPv2,
+                    "ppv3": data[0].data.devicesData[0].data.statusData.pPv3,
+                    "ppv4": data[0].data.devicesData[0].data.statusData.pPv4,
+                    "importFromGrid": data[0].data.devicesData[0].data.statusData.pactouser,
+                    "exportToGrid": data[0].data.devicesData[0].data.statusData.pactogrid,
+                    "discharging": data[0].data.devicesData[0].data.statusData.pdisCharge,
+                    "charging": data[0].data.devicesData[0].data.statusData.chargePower,
+                    "stateOfCharge": data[0].data.devicesData[0].data.statusData.SOC,
+                    "consumptionPower": data[0].data.devicesData[0].data.statusData.pLocalLoad,
+                    "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime
+                  })
+              }
+        
+              else if( devices[sn].growattType === "tlx") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+          
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+              }
+        
+              else if( devices[sn].growattType === "mix") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+          
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+              }
+        
+              else if( devices[sn].growattType === "spa") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+          
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+              }
+        
+              else if( devices[sn].growattType === "hps") {
+                devicesData.push({
+                  sn: sn,
+                  data: devices[sn],
+                });
+          
+                  data.push({
+                    plantid: key,
+                    data: { ...rest, devicesData }
+                  })
+              } else { console.log("Inverter not yet supported. Please log a call at module Github page, https://github.com/mumblebaj/MMM-Growatt/issues") }
+            });
+          }) 
+
         return plantDataFiltered;
     },
 
     getGrowattData: async function (payload) {
-        let keys = "";
-        let deviceSerial = "";
+        // let keys = "";
+        // let deviceSerial = "";
         const growatt = new api({})
         let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
         console.log('login: ', login)
@@ -53,17 +161,17 @@ module.exports = NodeHelper.create({
         console.log('logout:', logout)
         
         // Get the Plant ID here
-        keys = Object.keys(getAllPlantData);
+        // keys = Object.keys(getAllPlantData);
 
         // Get the device serial Number
-        keys.forEach(key => {
-                let { devices, ...rest } = getAllPlantData[key];
-                deviceSerial = Object.keys(devices);
-        })
+        //keys.forEach(key => {
+        //        let { devices, ...rest } = getAllPlantData[key];
+        //        deviceSerial = Object.keys(devices);
+        // })
 
         var plantData = getAllPlantData;
 
-        var parserResponse = this.deconstructPlantData(keys, deviceSerial, plantData, payload)
+        var parserResponse = this.deconstructPlantData(plantData, payload)
 
         var growattDataParsed = plantDataFiltered;
 

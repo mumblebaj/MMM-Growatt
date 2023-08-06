@@ -2,10 +2,9 @@ Module.register("MMM-Growatt", {
 
     defaults: {
         title: "MMM-Growatt",
-        updateInterval: 1000*60*60,
+        updateInterval: 1000*60*15,
         username: "username",
-        password: "password",
-        deviceSerial: "deviceSerial"
+        password: "password"
     },
 
     getStyles: function() {
@@ -158,7 +157,7 @@ Module.register("MMM-Growatt", {
         const solarLabel = document.createElement("div");
         solarLabel.id = "solar-label";
         solarLabel.classList.add("label");
-        var ppvData = parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2);
+        var ppvData = this.growattData[0].ppv ? this.growattData[0].ppv : parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2);
         solarLabel.innerHTML =  `Solar: ${ppvData}W`;
         // solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
         solarLine.appendChild(solarLabel);
@@ -190,7 +189,8 @@ Module.register("MMM-Growatt", {
         const homeLabel = document.createElement("div");
         homeLabel.id = "home-label";
         homeLabel.classList.add("label");
-        homeLabel.innerHTML = `${this.growattData[0].consumptionPower}W/${this.growattData[0].rateVA}VA`;
+		let rateVA = this.growattData[0].rateVA ? this.growattData[0].rateVA : 0;
+        homeLabel.innerHTML = `${this.growattData[0].consumptionPower}W/${rateVA}VA`;
         // homeLabel.innerHTML += this.translate("HOME_CONSUMPTION");
         homeLine.appendChild(homeLabel);
 
@@ -217,7 +217,13 @@ Module.register("MMM-Growatt", {
         const gridLabel = document.createElement("div");
         gridLabel.id = "grid-label";
         gridLabel.classList.add("label");
+		if (this.growattData[0].gridPower) {
         gridLabel.innerHTML = `${this.growattData[0].gridPower}W`; 
+		} else if (this.growattData[0].importFromGrid > 0) {
+			gridLabel.innerHTML = `${this.growattData[0].importFromGrid}W`;
+		} else if (this.growattData[0].exportToGrid > 0) {
+			gridLabel.innerHTML = `${this.growattData[0].exportToGrid}W`;
+		}
         gridLine.appendChild(gridLabel);
 
         // Positive value means feeding to grid
@@ -229,7 +235,21 @@ Module.register("MMM-Growatt", {
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
-        } else {
+        } else if (this.growattData[0].importFromGrid > 0) {
+			gridLine.classList.add("active-red")
+            gridLabel.classList.add("font-red");
+
+            const gridArrowOut = document.createElement("div");
+            gridArrowOut.classList.add("arrow", "right", "active");
+            gridLine.appendChild(gridArrowOut);
+		} else if (this.growattData[0].exportToGrid > 0) {
+			gridLine.classList.add("active")
+            //gridLabel.classList.add("font-red");
+
+            const gridArrowOut = document.createElement("div");
+            gridArrowOut.classList.add("arrow", "left", "active");
+            gridLine.appendChild(gridArrowOut);
+		} else {
             // gridLabel.innerHTML += this.translate("GRID_IDLE");
             gridLine.classList.add("dimmed");
         }
@@ -244,7 +264,11 @@ Module.register("MMM-Growatt", {
         const batteryLabel = document.createElement("div");
         batteryLabel.id = "battery-label";
         batteryLabel.classList.add("label");
+		if (this.growattData[0].discharging > 0) {
         batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
+		} else if (this.growattData[0].charging > 0) {
+			batterLabel.innerHTML = `${this.growattData[0].charging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
+		}
         batteryLine.appendChild(batteryLabel);
 
         const dateTimeLabel = document.createElement("div");
@@ -257,7 +281,7 @@ Module.register("MMM-Growatt", {
             batteryLine.classList.add("active-amber");
 
         // Negative value means charging battery
-        if(this.growattData[0].discharging < 0) {
+        if(this.growattData[0].discharging < 0 || this.growattData[0].charging > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
             batteryLine.classList.add("active");
             batteryLabel.classList.add("font-green");
