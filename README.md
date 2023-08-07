@@ -57,5 +57,14 @@ npm install
 ## Changes
 Updated module to no longer require user to specify plantId and deviceSerial. The values will be automatically obtained.
 
+### 2023/08/07
+- Update module to use growatt v 0.5.6
+- Update to cater for different growatt inverter types
+- Types catered for
+  - storage
+  - tlx
+  - tlxh
+- Dynamically get plantId and deviceSerial
+
 ### Future updates
 Investigate adding multiple device capabilities.
