@@ -266,8 +266,8 @@ Module.register("MMM-Growatt", {
         batteryLabel.classList.add("label");
 		if (this.growattData[0].discharging > 0) {
         batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
-		} else if (this.growattData[0].charging > 0) {
-			batterLabel.innerHTML = `${this.growattData[0].charging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
+		} else if (this.growattData[0].charging > 0 || this.growattData[0].charging <= 0) {
+			batteryLabel.innerHTML = `${this.growattData[0].charging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
 		}
         batteryLine.appendChild(batteryLabel);
 
@@ -281,7 +281,7 @@ Module.register("MMM-Growatt", {
             batteryLine.classList.add("active-amber");
 
         // Negative value means charging battery
-        if(this.growattData[0].discharging < 0 || this.growattData[0].charging > 0) {
+        if(this.growattData[0].charging < 0 || this.growattData[0].charging > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
             batteryLine.classList.add("active");
             batteryLabel.classList.add("font-green");
