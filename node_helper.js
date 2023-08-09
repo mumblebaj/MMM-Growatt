@@ -45,11 +45,14 @@ module.exports = NodeHelper.create({
           let charging = 0;
           if (data[0].data.devicesData[0].data.statusData.batPower <= 0) {
             charging = data[0].data.devicesData[0].data.statusData.batPower
-          } 
+          }
           let discharging = 0;
           if (data[0].data.devicesData[0].data.statusData.batPower > 0) {
             discharging = data[0].data.devicesData[0].data.statusData.batPower
           } else { discharging = 0 }
+          let epvTotal = parseInt(data[0].data.devicesData[0].data.totalData.epvTotal) / 1000;
+          let dischargeTotal = parseInt(data[0].data.devicesData[0].data.totalData.eDischargeTotal) / 1000;
+          let chargeTotal = parseInt(data[0].data.devicesData[0].data.totalData.chargeTotal) / 1000;
           plantDataFiltered.push({
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
@@ -100,7 +103,7 @@ module.exports = NodeHelper.create({
           let esystemToday = data[0].data.devicesData[0].data.historyLast.esystemToday;
           let esystemTotal = data[0].data.devicesData[0].data.historyLast.esystemTotal;
           let exportedToGridToday = parseInt(esystemToday) - parseInt(eselfToday);
-          let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);          
+          let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);
           plantDataFiltered.push({
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
@@ -121,16 +124,16 @@ module.exports = NodeHelper.create({
             "stateOfCharge": data[0].data.devicesData[0].data.statusData.SOC,
             "consumptionPower": data[0].data.devicesData[0].data.statusData.pLocalLoad,
             "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime,
-            "useEnergyToday": data[0].data.devicesData[0].data.totalData.useEnergyToday,
-            "useEnergyTotal": data[0].data.devicesData[0].data.totalData.useEnergyTotal,
-            "chargeToday": data[0].data.devicesData[0].data.totalData.chargeToday,
-            "chargeTotal": chargeTotal,
-            "eDischargeTotal": dischargeTotal,
-            "eDischargeToday": data[0].data.devicesData[0].data.totalData.eDischargeToday,
-            "eToUserTotal": data[0].data.devicesData[0].data.totalData.eToUserTotal,
-            "eToUserToday": data[0].data.devicesData[0].data.totalData.eToUserToday,
-            "epvToday": data[0].data.devicesData[0].data.totalData.epvToday,
-            "epvTotal": epvTotal            
+            "useEnergyToday": data[0].data.devicesData[0].data.historyLast.elocalLoadToday,
+            "useEnergyTotal": data[0].data.devicesData[0].data.historyLast.elocalLoadTotal,
+            "chargeToday": data[0].data.devicesData[0].data.historyLast.echargeToday,
+            "chargeTotal": data[0].data.devicesData[0].data.historyLast.echargeTotal,
+            "eDischargeTotal": data[0].data.devicesData[0].data.historyLast.edischargeTotal,
+            "eDischargeToday": data[0].data.devicesData[0].data.historyLast.edischargeToday,
+            "eToUserTotal": exportedToGridTotal,
+            "eToUserToday": exportedToGridToday,
+            "epvToday": epvToday,
+            "epvTotal": data[0].data.devicesData[0].data.historyLast.epvTotal
           })
         }
 
@@ -148,13 +151,13 @@ module.exports = NodeHelper.create({
           let epv2Today = data[0].data.devicesData[0].data.historyLast.epv2Today;
           let epv3Today = data[0].data.devicesData[0].data.historyLast.epv3Today;
           let epv4Today = data[0].data.devicesData[0].data.historyLast.epv4Today;
-          let epvToday = parseInt(epv1Today) + parseInt(epv2Today) + parseInt(epv3Today) + parseInt(epv4Today)
+          let epvToday = parseInt(epv1Today) + parseInt(epv2Today) + parseInt(epv3Today) + parseInt(epv4Today);
           let eselfToday = data[0].data.devicesData[0].data.historyLast.eselfToday;
           let eselfTotal = data[0].data.devicesData[0].data.historyLast.eselfTotal;
           let esystemToday = data[0].data.devicesData[0].data.historyLast.esystemToday;
           let esystemTotal = data[0].data.devicesData[0].data.historyLast.esystemTotal;
           let exportedToGridToday = parseInt(esystemToday) - parseInt(eselfToday);
-          let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);          
+          let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);
           plantDataFiltered.push({
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
@@ -174,7 +177,17 @@ module.exports = NodeHelper.create({
             "charging": data[0].data.devicesData[0].data.statusData.chargePower,
             "stateOfCharge": data[0].data.devicesData[0].data.statusData.SOC,
             "consumptionPower": data[0].data.devicesData[0].data.statusData.pLocalLoad,
-            "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime
+            "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime,
+            "useEnergyToday": data[0].data.devicesData[0].data.historyLast.elocalLoadToday,
+            "useEnergyTotal": data[0].data.devicesData[0].data.historyLast.elocalLoadTotal,
+            "chargeToday": data[0].data.devicesData[0].data.historyLast.echargeToday,
+            "chargeTotal": data[0].data.devicesData[0].data.historyLast.echargeTotal,
+            "eDischargeTotal": data[0].data.devicesData[0].data.historyLast.edischargeTotal,
+            "eDischargeToday": data[0].data.devicesData[0].data.historyLast.edischargeToday,
+            "eToUserTotal": exportedToGridTotal,
+            "eToUserToday": exportedToGridToday,
+            "epvToday": epvToday,
+            "epvTotal": data[0].data.devicesData[0].data.historyLast.epvTotal
           })
         }
 
