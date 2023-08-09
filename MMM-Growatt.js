@@ -4,7 +4,8 @@ Module.register("MMM-Growatt", {
         title: "MMM-Growatt",
         updateInterval: 1000*60*15,
         username: "username",
-        password: "password"
+        password: "password",
+        mode: "dual"
     },
 
     getStyles: function() {
@@ -65,7 +66,13 @@ Module.register("MMM-Growatt", {
         var self = this
         if (notification === "GROWATT_DATA") {
             this.growattData = payload
-            this.updateWrapper(this.growattData);
+            if (this.config.mode === "dual") {
+                this.sendNotification("GROWATT_STATS_DATA", this.growattData)
+                this.updateWrapper(this.growattData)
+            } else if (this.config.mode === "single"){
+                this.updateWrapper(this.growattData);
+            }
+            
         }
     },
 

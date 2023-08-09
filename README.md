@@ -37,6 +37,7 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
+                mode: "dual", // Specify 'dual' when running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) together else specify 'single'
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
                         }
@@ -66,5 +67,7 @@ Updated module to no longer require user to specify plantId and deviceSerial. Th
   - tlxh
 - Dynamically get plantId and deviceSerial
 
-### Future updates
-Investigate adding multiple device capabilities.
+### 2023/08/09
+- Add a dual and single mode to allow running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) together.
+- This change essentially allows for a single data query and sends the data up to the MMM-Growatt-Stats module which now does not need to make it's own call unless it is run in "single" mode.
+
