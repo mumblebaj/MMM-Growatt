@@ -1,10 +1,14 @@
 var NodeHelper = require('node_helper')
 var api = require('growatt')
+var fs = require('fs')
+var os = require('os')
 
 const options = {
   plantData: true, weather: false, totalData: true, statusData: true, deviceData: true,
   deviceType: false, historyLast: true, historyAll: false
 }
+
+var growattlog = `${__dirname}/growatt.log`;
 
 module.exports = NodeHelper.create({
   requiresVersion: '2.22.0',
@@ -19,20 +23,13 @@ module.exports = NodeHelper.create({
     let deviceSerial = "";
     let data = [];
 
-    // const plantId = keys;
-    // const loggerId = deviceSerial;
-
     keys = Object.keys(d);
 
     keys.forEach(key => {
       let { devices, ...rest } = d[key];
       deviceSerial = Object.keys(devices);
-      // console.log("Key: ", deviceSerial);
       let devicesData = [];
       deviceSerial.forEach(sn => {
-        // console.log("SN: ", sn)
-        // console.log("Growatt Type: ", devices[sn].growattType)
-
         if (devices[sn].growattType === "storage") {
           devicesData.push({
             sn: sn,
@@ -233,27 +230,24 @@ module.exports = NodeHelper.create({
   },
 
   getGrowattData: async function (payload) {
-    // let keys = "";
-    // let deviceSerial = "";
+
     const growatt = new api({})
     let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
     console.log('login: ', login)
 
     let getAllPlantData = await growatt.getAllPlantData(options).catch(e => { console.log(e) })
+    console.log(getAllPlantData)
 
     let logout = await growatt.logout().catch(e => { console.log(e) })
     console.log('logout:', logout)
 
-    // Get the Plant ID here
-    // keys = Object.keys(getAllPlantData);
-
-    // Get the device serial Number
-    //keys.forEach(key => {
-    //        let { devices, ...rest } = getAllPlantData[key];
-    //        deviceSerial = Object.keys(devices);
-    // })
-
     var plantData = getAllPlantData;
+
+    if (payload.debug === true) {
+      fs.appendFile(growattlog, JSON.stringify(plantData, null, 2) + os.EOL, function (err) {
+        if (err) throw err;
+      })
+    }
 
     var parserResponse = this.deconstructPlantData(plantData, payload)
 

@@ -37,6 +37,7 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
+                debug: false, // set to true of you want to create a debug log
                 mode: "dual", // Specify 'dual' when running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) together else specify 'single'
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
