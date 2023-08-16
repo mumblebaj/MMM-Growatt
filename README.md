@@ -37,14 +37,13 @@ Add the module to the modules array in the `config/config.js` file:
             config: {
                 username: "username",
                 password: "password",
-                debug: false, // set to true of you want to create a debug log
+                debug: false, // set to true if you want to create a debug log
                 mode: "dual", // Specify 'dual' when running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) together else specify 'single'
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
                         }
 },
 ````
-![Example](images/image-4.png) ![Example](images/image-3.png) 
 
 ## Updating
 
@@ -69,6 +68,7 @@ Updated module to no longer require user to specify plantId and deviceSerial. Th
 - Dynamically get plantId and deviceSerial
 
 ### 2023/08/09
-- Add a dual and single mode to allow running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) together.
+- Add a dual and single mode to allow running [MMM-Growatt](https://github.com/mumblebaj/MMM-Growatt.git) and [MMM-Growatt-Stats](https://github.com/mumblebaj/MMM-Growatt-Stats.git) to operate together based on a single set of data.
 - This change essentially allows for a single data query and sends the data up to the MMM-Growatt-Stats module which now does not need to make it's own call unless it is run in "single" mode.
+- Add a debug mode to allow collection of API data for investigations
 
