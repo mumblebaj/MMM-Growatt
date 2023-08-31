@@ -73,7 +73,7 @@ Updated module to no longer require user to specify plantId and deviceSerial. Th
 - This change essentially allows for a single data query and sends the data up to the MMM-Growatt-Stats module which now does not need to make it's own call unless it is run in "single" mode.
 - Add a debug mode to allow collection of API data for investigations
 
-### 2023/08/09
+### 2023/08/31
 - Had a request from user [ruralbrewer](https://github.com/ruralbrewer) to add support for [https://server-us.growatt.com](https://server-us.growatt.com).
 - Users in the US registered on the US Growatt Server are now able to use the module.
 - A new Config option  usServer: true must be added to the config/config.js. Users registered on the [https://server.growatt.com](https://server.growatt.com) need not add this option.
