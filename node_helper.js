@@ -3,6 +3,10 @@ var api = require('growatt')
 var fs = require('fs')
 var os = require('os')
 
+const servers = {
+  main: 'https://server.growatt.com',
+  us: 'https://server-us.growatt.com'
+}
 const options = {
   plantData: true, weather: false, totalData: true, statusData: true, deviceData: true,
   deviceType: false, historyLast: true, historyAll: false
@@ -231,7 +235,9 @@ module.exports = NodeHelper.create({
 
   getGrowattData: async function (payload) {
 
-    const growatt = new api({})
+    const server = payload.usServer ? servers.us : servers.main;
+
+    const growatt = new api({server: server})
     let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
     console.log('login: ', login)
 
