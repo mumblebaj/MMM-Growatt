@@ -14,7 +14,7 @@
     "MagicMirror",
     "Growatt"
   ],
-  "author": "",
+  "author": "mumblebaj",
   "license": "ISC",
   "dependencies": {
     "growatt": "^0.5.6"
