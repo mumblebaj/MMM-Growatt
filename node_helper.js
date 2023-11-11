@@ -239,13 +239,12 @@ module.exports = NodeHelper.create({
 
     const growatt = new api({server: server})
     let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
-    console.log('login: ', login)
+    // console.log('MMM-Growatt login: ', login)
 
     let getAllPlantData = await growatt.getAllPlantData(options).catch(e => { console.log(e) })
-    console.log(getAllPlantData)
 
     let logout = await growatt.logout().catch(e => { console.log(e) })
-    console.log('logout:', logout)
+    // console.log('MMM-Growatt logout:', logout)
 
     var plantData = getAllPlantData;
 
