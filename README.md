@@ -58,6 +58,10 @@ npm install
 
 ```` 
 ## Changes
+
+### 2025/02/28
+- Update module to  provide import and export to and from grid data for tlxh.
+
 Updated module to no longer require user to specify plantId and deviceSerial. The values will be automatically obtained.
 
 ### 2024/07/04
