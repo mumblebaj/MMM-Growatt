@@ -55,6 +55,7 @@ module.exports = NodeHelper.create({
           let dischargeTotal = parseInt(data[0].data.devicesData[0].data.totalData.eDischargeTotal) / 1000;
           let chargeTotal = parseInt(data[0].data.devicesData[0].data.totalData.chargeTotal) / 1000;
           plantDataFiltered.push({
+            "growattType": "storage",
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
             "city": data[0].data.plantData.city,
@@ -101,13 +102,15 @@ module.exports = NodeHelper.create({
           let epvToday = parseInt(epv1Today) + parseInt(epv2Today) + parseInt(epv3Today) + parseInt(epv4Today);
           let eselfToday = data[0].data.devicesData[0].data.historyLast.eselfToday;
           let eselfTotal = data[0].data.devicesData[0].data.historyLast.eselfTotal;
+          let elocalLoadToday = data[0].data.devicesData[0].data.historyLast.elocalLoadToday;
           let esystemToday = data[0].data.devicesData[0].data.historyLast.esystemToday;
           let esystemTotal = data[0].data.devicesData[0].data.historyLast.esystemTotal;
-          let importedFromGridToday = data[0].data.devicesData[0].data.statusData.pactouser;
-          let importedFromGridTotal = data[0].data.devicesData[0].data.historyLast.pacToUserTotal;
+          let importedFromGridToday = data[0].data.devicesData[0].data.statusData.pactouser / 1000;
+          let importedFromGridTotal = elocalLoadToday - eselfToday;
           let exportedToGridToday = data[0].data.devicesData[0].data.statusData.pactogrid; //data[0].data.devicesData[0].data.statusData.pacstouser;
           let exportedToGridTotal = data[0].data.devicesData[0].data.historyLast.pacToGridTotal;
           plantDataFiltered.push({
+            "growattType": "tlxh",
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
             "city": data[0].data.plantData.city,
@@ -135,6 +138,8 @@ module.exports = NodeHelper.create({
             "eDischargeToday": data[0].data.devicesData[0].data.historyLast.edischargeToday,
             "importedFromGridToday": importedFromGridToday,
             "importedFromGridTotal": importedFromGridTotal,
+            "exportedToGridToday": exportedToGridToday,
+            "exportedToGridTotal": exportedToGridTotal,
             "eToUserTotal": exportedToGridTotal,
             "eToUserToday": exportedToGridToday,
             "epvToday": epvToday,
@@ -164,6 +169,7 @@ module.exports = NodeHelper.create({
           let exportedToGridToday = parseInt(esystemToday) - parseInt(eselfToday);
           let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);
           plantDataFiltered.push({
+            "growattType": "tlx",
             "plantName": data[0].data.plantName,
             "country": data[0].data.plantData.country,
             "city": data[0].data.plantData.city,
@@ -241,7 +247,7 @@ module.exports = NodeHelper.create({
 
     const server = payload.usServer ? servers.us : servers.main;
 
-    const growatt = new api({server: server})
+    const growatt = new api({ server: server })
     let login = await growatt.login(payload.username, payload.password).catch(e => { console.log(e) })
     // console.log('MMM-Growatt login: ', login)
 

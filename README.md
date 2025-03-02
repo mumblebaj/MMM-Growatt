@@ -59,6 +59,9 @@ npm install
 ```` 
 ## Changes
 
+### 2025/03/02
+- Add support for tlxh grid export
+
 ### 2025/02/28
 - Update module to  provide import and export to and from grid data for tlxh.
 
