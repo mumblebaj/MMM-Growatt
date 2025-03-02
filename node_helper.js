@@ -139,6 +139,7 @@ module.exports = NodeHelper.create({
             "importedFromGridToday": importedFromGridToday,
             "importedFromGridTotal": importedFromGridTotal,
             "exportedToGridToday": exportedToGridToday,
+            "exportedToGridTotal": exportedToGridTotal,
             "eToUserTotal": exportedToGridTotal,
             "eToUserToday": exportedToGridToday,
             "epvToday": epvToday,
