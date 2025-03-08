@@ -132,7 +132,7 @@ Module.register("MMM-Growatt", {
             </tr>
             <tr>
                 <td><img src="/modules/MMM-Growatt/images/state_loadS.png" width="40"></td>
-                <td colspan="2">Load Power</td>
+                <td colspan="2">Load Consumption</td>
                 <td id="load-power">-- W</td>
             </tr>
             <tr>
