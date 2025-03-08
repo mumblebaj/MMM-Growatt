@@ -24,6 +24,12 @@
     top: calc(50% - (var(--width) / 2));
     /* background-color: var(--color-background); */
   }
+
+  #growatt-table-wrapper {
+    width: 100%;
+      display: flex;
+      justify-content: center;
+   }
   
   .hidden {
     display: none;
@@ -274,3 +280,26 @@
     bottom: var(--arrow-line-distance);
     left: var(--arrow-line-centering);
   }
+
+  .growatt-table {
+    width: 90%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+}
+
+.growatt-table td {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+.module-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.footer {
+    font-style: italic;
+    font-size: 0.9rem;
+}

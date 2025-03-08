@@ -23,7 +23,7 @@ Module.register("MMM-Growatt", {
     start: function() {
         Log.info(`Starting module: ${this.name}`);
 
-        suspended = false;
+        // suspended = false;
 
         this.getGrowattData();
         this.scheduleUpdate();
@@ -33,17 +33,17 @@ Module.register("MMM-Growatt", {
         Log.info('Stopping module ' + this.name);
     },
 
-    resume: function() {
-        Log.info('Resuming module ' + this.name);
-        Log.debug('with config: ' + JSON.stringify(this.config));
-        this.suspended = false;
-        this.updateWrapper(this.growattData);
-    },
+    // resume: function() {
+    //     Log.info('Resuming module ' + this.name);
+    //     Log.debug('with config: ' + JSON.stringify(this.config));
+    //     this.suspended = false;
+    //     this.updateWrapper(this.growattData);
+    // },
 
-    suspend: function() {
-        Log.info('Suspending module ' + this.name);
-        this.suspended = true;
-    },
+    // suspend: function() {
+    //     Log.info('Suspending module ' + this.name);
+    //     this.suspended = true;
+    // },
 
     getGrowattData: function() {
         this.sendSocketNotification("GET_GROWATT_DATA", this.config)
@@ -68,9 +68,17 @@ Module.register("MMM-Growatt", {
             this.growattData = payload
             if (this.config.mode === "dual") {
                 this.sendNotification("GROWATT_STATS_DATA", this.growattData)
+				if (this.config.view === "table") {
+					this.createTable(this.growattData)
+				} else {
                 this.updateWrapper(this.growattData)
+				}
             } else if (this.config.mode === "single"){
+				if (this.config.view === "table") {
+					this.createTable(this.growattData)
+				} else {
                 this.updateWrapper(this.growattData);
+				}
             }
             
         }
@@ -79,10 +87,111 @@ Module.register("MMM-Growatt", {
     getDom: function() {
         const wrapper = document.createElement("div");
         wrapper.id = "growatt-wrapper";
-        wrapper.style.setProperty("--width", "600px");
-        wrapper.style.setProperty("--height", "500px");
-        wrapper.style.setProperty("--line-width", "7px");
 
+        return wrapper;
+    },
+
+    createTable: function() {
+		let wrapper = document.getElementById("growatt-wrapper");
+		
+		while (wrapper.hasChildNodes()) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+		
+		wrapper.id = "growatt-table-wrapper";
+		// Create table
+        const table = document.createElement("table");
+        table.id = "growatt-table";
+        table.className = "growatt-table";
+
+        // Define table structure (empty initially)
+        const tableContent = `
+            <tr>
+                <td rowspan="2"><img id="module-icon" src="/modules/MMM-Growatt/images/state_spf5000.png" width="50"></td>
+                <td id="module-name" colspan="3">${this.growattData[0].plantName}</td>
+            </tr>
+            <tr>
+                <td id="trees-saved">Deforestation: -- trees saved</td>
+                <td id="coal-saved">Coal Saved: -- KG</td>
+                <td id="co2-reduced">CO₂ Reduced: -- KG</td>
+            </tr>
+            <tr>
+                <td><img src="/modules/MMM-Growatt/images/state_grid.png" width="40"></td>
+                <td colspan="2">Grid Power</td>
+                <td id="grid-power">-- W</td>
+            </tr>
+            <tr>
+                <td><img src="/modules/MMM-Growatt/images/state_solor.png" width="40"></td>
+                <td colspan="2">Solar Power</td>
+                <td id="solar-power">-- W</td>
+            </tr>
+            <tr>
+                <td><img src="/modules/MMM-Growatt/images/state_bat_null.png" width="40"></td>
+                <td colspan="2">Battery Power</td>
+                <td id="battery-power">-- W</td>
+            </tr>
+            <tr>
+                <td><img src="/modules/MMM-Growatt/images/state_loadS.png" width="40"></td>
+                <td colspan="2">Load Power</td>
+                <td id="load-power">-- W</td>
+            </tr>
+            <tr>
+                <td colspan="4" id="footer">Static taken at: ${this.growattData[0].staticTakenAt}</td>
+            </tr>
+        `;
+
+        table.innerHTML = tableContent;
+        wrapper.appendChild(table);
+		this.updateTable();
+		return wrapper;
+	},
+
+    updateTable: function () {
+        if (!this.growattData) return;
+        
+        let wrapper = document.getElementById("growatt-wrapper");
+
+        let treesSavedElement = document.getElementById("trees-saved");
+        let coalSavedElement = document.getElementById("coal-saved");
+        let co2ReducedElement = document.getElementById("co2-reduced");
+        let gridPowerElement = document.getElementById("grid-power");
+        let solarPowerElement = document.getElementById("solar-power");
+        let batteryPowerElement = document.getElementById("battery-power");
+        let loadPowerElement = document.getElementById("load-power");
+
+        if (treesSavedElement) {
+            treesSavedElement.innerHTML = `Deforestation: ${this.growattData[0].treesSaved} trees saved`;
+        }
+        if (coalSavedElement) {
+            coalSavedElement.innerHTML = `Coal Saved: ${this.growattData[0].coalSaved} KG`;
+        }
+        if (co2ReducedElement) {
+            co2ReducedElement.innerHTML = `CO₂ Reduced: ${this.growattData[0].coalSaved} KG`;
+        }
+        if (gridPowerElement) {
+            gridPowerElement.innerHTML = `${this.growattData[0].gridPower || "--"} W`;
+        }
+        let solarValue = parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2)
+        if (solarPowerElement) {
+            solarPowerElement.innerHTML = `${solarValue || "0"} W`;
+        }
+        let chargeDischarge = "";
+        let chargeDischargeValue = 0;
+        if (this.growattData[0].charging > 0) {
+            chargeDischarge = 'Charging'
+            chargeDischargeValue = this.growattData[0].charging
+        } else if (this.growattData[0].discharging > 0) {
+            chargeDischarge = 'Discharging'
+            chargeDischargeValue = this.growattData[0].discharging
+        }
+        if (batteryPowerElement) {
+            batteryPowerElement.innerHTML = `SoC: ${this.growattData[0].stateOfCharge || "0"} % 
+            ${chargeDischarge}: ${chargeDischargeValue} W`;
+        }
+        if (loadPowerElement) {
+            loadPowerElement.innerHTML = `${this.growattData[0].consumptionPower || "0"} W / 
+            ${this.growattData[0].rateVA || "--"}VA`;
+        }
         return wrapper;
     },
 
@@ -91,6 +200,10 @@ Module.register("MMM-Growatt", {
         while (wrapper.hasChildNodes()) {
             wrapper.removeChild(wrapper.firstChild);
         }
+
+        wrapper.style.setProperty("--width", "600px");
+		wrapper.style.setProperty("--height", "500px");
+		wrapper.style.setProperty("--line-width", "7px");
 
         this.addIcons(wrapper);
 
