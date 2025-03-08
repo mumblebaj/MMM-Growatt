@@ -163,17 +163,17 @@ Module.register("MMM-Growatt", {
             treesSavedElement.innerHTML = `Deforestation: ${this.growattData[0].treesSaved} trees saved`;
         }
         if (coalSavedElement) {
-            coalSavedElement.innerHTML = `Coal Saved: ${this.growattData[0].coalSaved} KG`;
+            coalSavedElement.innerHTML = `Coal Saved: ${this.growattData[0].coalSaved}KG`;
         }
         if (co2ReducedElement) {
-            co2ReducedElement.innerHTML = `CO₂ Reduced: ${this.growattData[0].coalSaved} KG`;
+            co2ReducedElement.innerHTML = `CO₂ Reduced: ${this.growattData[0].coalSaved}KG`;
         }
         if (gridPowerElement) {
-            gridPowerElement.innerHTML = `${this.growattData[0].gridPower || "--"} W`;
+            gridPowerElement.innerHTML = `${this.growattData[0].gridPower || "--"}W`;
         }
         let solarValue = parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2)
         if (solarPowerElement) {
-            solarPowerElement.innerHTML = `${solarValue || "0"} W`;
+            solarPowerElement.innerHTML = `${solarValue || "0"}W`;
         }
         let chargeDischarge = "";
         let chargeDischargeValue = 0;
@@ -185,11 +185,11 @@ Module.register("MMM-Growatt", {
             chargeDischargeValue = this.growattData[0].discharging
         }
         if (batteryPowerElement) {
-            batteryPowerElement.innerHTML = `SoC: ${this.growattData[0].stateOfCharge || "0"} % 
-            ${chargeDischarge}: ${chargeDischargeValue} W`;
+            batteryPowerElement.innerHTML = `SoC: ${this.growattData[0].stateOfCharge || "0"}% 
+            ${chargeDischarge}: ${chargeDischargeValue}W`;
         }
         if (loadPowerElement) {
-            loadPowerElement.innerHTML = `${this.growattData[0].consumptionPower || "0"} W / 
+            loadPowerElement.innerHTML = `${this.growattData[0].consumptionPower || "0"}W/
             ${this.growattData[0].rateVA || "--"}VA`;
         }
         return wrapper;
