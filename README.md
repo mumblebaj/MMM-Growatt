@@ -7,6 +7,7 @@ A [MagicMirror²](https://magicmirror.builders) module to display Growatt Power 
 
 ![Example](images/screenshot.png)
 ![Example](images/image-8.png)
+![Example](images/image-9.png)
 
 ## Dependencies
 - [growatt](https://www.npmjs.com/package/growatt)
@@ -41,6 +42,8 @@ Add the module to the modules array in the `config/config.js` file:
                 usServer: true, // only used by US Registered users
                 debug: false, // set to true if you want to create a debug log
                 mode: "dual", // Specify 'dual' when running https://github.com/mumblebaj/MMM-Growatt.git and https://github.com/mumblebaj/MMM-Growatt-Stats.git together else specify 'single'
+                view: "table", // Only add this if you want a minimalystic table view
+                rowToDisplay: [ "loadPower", "batteryPower", "solar", "loadPower" ] //Remove items you do not want to display on the table. Table will be ordered in the same order as items appear in the list. Not required of view is not table
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
                         }
@@ -58,6 +61,9 @@ npm install
 
 ```` 
 ## Changes
+
+### 2025/03/08
+- Add a minimalystic (table) view.
 
 ### 2025/03/02
 - Add support for tlxh grid export
