@@ -42,7 +42,8 @@ Add the module to the modules array in the `config/config.js` file:
                 usServer: true, // only used by US Registered users
                 debug: false, // set to true if you want to create a debug log
                 mode: "dual", // Specify 'dual' when running https://github.com/mumblebaj/MMM-Growatt.git and https://github.com/mumblebaj/MMM-Growatt-Stats.git together else specify 'single'
-                view: "table", // Only add this if you want a minimalystic tabular view
+                view: "table", // Only add this if you want a minimalystic table view
+                rowToDisplay: [ "loadPower", "batteryPower", "solar", "loadPower" ] //Remove items you do not want to display on the table. Table will be ordered in the same order as items appear in the list. Not required of view is not table
                 updateInterval: 1000*60*30 //Update every 30 minutes
                 
                         }
