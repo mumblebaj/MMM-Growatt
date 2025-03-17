@@ -63,26 +63,27 @@ Module.register("MMM-Growatt", {
     },
 
     socketNotificationReceived: function (notification, payload) {
-        var self = this
         if (notification === "GROWATT_DATA") {
-            this.growattData = payload
+            this.growattData = payload;
+
             if (this.config.mode === "dual") {
-                this.sendNotification("GROWATT_STATS_DATA", this.growattData)
-                if (this.config.view === "table") {
-                    this.createTable(this.growattData)
-                } else {
-                    this.updateWrapper(this.growattData)
-                }
-            } else if (this.config.mode === "single") {
-                if (this.config.view === "table") {
-                    this.createTable(this.growattData)
-                } else {
-                    this.updateWrapper(this.growattData);
-                }
+                this.sendNotification("GROWATT_STATS_DATA", this.growattData);
             }
 
+            if (this.config.view === "table") {
+                let existingTable = document.getElementById("growatt-table");
+
+                if (existingTable) {
+                    this.updateTable(); // Just update existing table
+                } else {
+                    this.createTable(); // Create table if it doesn't exist
+                }
+            } else {
+                this.updateWrapper(this.growattData);
+            }
         }
     },
+
 
     getDom: function () {
         const wrapper = document.createElement("div");
