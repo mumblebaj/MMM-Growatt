@@ -202,6 +202,78 @@ module.exports = NodeHelper.create({
           })
         }
 
+        else if (devices[sn].growattType === "noah") {
+          devicesData.push({
+            sn: sn,
+            data: devices[sn],
+          });
+
+          data.push({
+            plantid: key,
+            data: {
+              ...rest,
+              devicesData
+            }
+          })
+          let epv1Today = data[0].data.devicesData[0].data.historyLast.epv1Today;
+          let epv2Today = data[0].data.devicesData[0].data.historyLast.epv2Today;
+          let epv3Today = data[0].data.devicesData[0].data.historyLast.epv3Today;
+          let epv4Today = data[0].data.devicesData[0].data.historyLast.epv4Today;
+          let epvToday = parseInt(epv1Today) + parseInt(epv2Today) + parseInt(epv3Today) + parseInt(epv4Today);
+          let eselfToday = data[0].data.devicesData[0].data.historyLast.eselfToday;
+          let eselfTotal = data[0].data.devicesData[0].data.historyLast.eselfTotal;
+          let esystemToday = data[0].data.devicesData[0].data.historyLast.esystemToday;
+          let esystemTotal = data[0].data.devicesData[0].data.historyLast.esystemTotal;
+          let exportedToGridToday = parseInt(esystemToday) - parseInt(eselfToday);
+          let charge = 0;
+          if (parseInt(data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower) > 0) {
+            charge = data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower
+          } else {
+            charge = 0
+          }
+          console.log('Charging', data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower)
+          let discharge = 0;
+          if (parseInt(data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower) < 0) {
+            discharge = data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower
+          } else {
+            discharge = 0
+          }
+          let exportedToGridTotal = parseInt(esystemTotal) - parseInt(eselfTotal);
+          plantDataFiltered.push({
+            "growattType": "noah",
+            "plantName": data[0].data.plantName,
+            "country": data[0].data.plantData.country,
+            "city": data[0].data.plantData.city,
+            "accountName": data[0].data.plantData.accountName,
+            "inverterPower": data[0].data.plantData.nominalPower,
+            "treesSaved": data[0].data.plantData.tree,
+            "coalSaved": data[0].data.plantData.coal,
+            "ppv": data[0].data.devicesData[1].data.historyLast.ppv,
+            //"ppv1": data[0].data.devicesData[1].data.statusData.pPv1,
+            //"ppv2": data[0].data.devicesData[1].data.statusData.pPv2,
+            //"ppv3": data[0].data.devicesData[1].data.statusData.pPv3,
+            //"ppv4": data[0].data.devicesData[1].data.statusData.pPv4,
+            //"importFromGrid": data[0].data.devicesData[0].data.statusData.pactouser,
+            //"exportToGrid": data[0].data.devicesData[0].data.statusData.pactogrid,
+            "discharging": discharge,
+            "charging": charge,
+            "stateOfCharge": data[0].data.devicesData[1].data.historyLast.totalBatteryPackSoc,
+            "consumptionPower": data[0].data.devicesData[1].data.historyLast.pac,
+            "staticTakenAt": data[0].data.devicesData[1].data.deviceData.lastUpdateTime,
+            //"useEnergyToday": data[0].data.devicesData[0].data.historyLast.elocalLoadToday,
+            //"useEnergyTotal": data[0].data.devicesData[0].data.historyLast.elocalLoadTotal,
+            //"chargeToday": data[0].data.devicesData[0].data.historyLast.echargeToday,
+            //"chargeTotal": data[0].data.devicesData[0].data.historyLast.echargeTotal,
+            //"eDischargeTotal": data[0].data.devicesData[0].data.historyLast.edischargeTotal,
+            //"eDischargeToday": data[0].data.devicesData[0].data.historyLast.edischargeToday,
+            //"eToUserTotal": exportedToGridTotal,
+            //"eToUserToday": exportedToGridToday,
+            "epvToday": data[0].data.devicesData[1].data.totalData.eToday,
+            "epvTotal": data[0].data.devicesData[1].data.totalData.eTotal
+          })
+
+        }
+
         else if (devices[sn].growattType === "mix") {
           devicesData.push({
             sn: sn,
@@ -267,6 +339,12 @@ module.exports = NodeHelper.create({
     var parserResponse = this.deconstructPlantData(plantData, payload)
 
     var growattDataParsed = plantDataFiltered;
+
+    if (growattDataParsed.length > 1) {
+      growattDataParsed = growattDataParsed.filter(item => item.growattType === "noah");
+  } else {
+      growattDataParsed = growattDataParsed;
+  }
 
     this.sendSocketNotification('GROWATT_DATA', growattDataParsed)
   },

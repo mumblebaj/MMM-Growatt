@@ -62,6 +62,9 @@ npm install
 ```` 
 ## Changes
 
+### 2025/03/21
+- Added support for noah, which is part of the Growatt Neo 800Mx package. The setup of this Neo package is a little different to the normal setup. This now adds support for this Neo package. 
+
 ### 2025/03/08
 - Add a minimalystic (table) view.
 
