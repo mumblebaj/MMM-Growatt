@@ -298,7 +298,7 @@ Module.register("MMM-Growatt", {
         const solarLabel = document.createElement("div");
         solarLabel.id = "solar-label";
         solarLabel.classList.add("label");
-        var ppvData = this.growattData[0].ppv ? this.growattData[0].ppv : parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2);
+        var ppvData = this.growattData[0].ppv ? this.growattData[0].ppv : this.growattData[0].ppv1 ? parseInt(this.growattData[0].ppv1) + parseInt(this.growattData[0].ppv2) : 0;
         solarLabel.innerHTML = `Solar: ${ppvData}W`;
         // solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
         solarLine.appendChild(solarLabel);
