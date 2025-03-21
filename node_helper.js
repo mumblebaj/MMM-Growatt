@@ -231,7 +231,7 @@ module.exports = NodeHelper.create({
           } else {
             charge = 0
           }
-          console.log('Charging', data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower)
+          
           let discharge = 0;
           if (parseInt(data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower) < 0) {
             discharge = data[0].data.devicesData[1].data.historyLast.totalBatteryPackChargingPower
