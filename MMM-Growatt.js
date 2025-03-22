@@ -405,7 +405,7 @@ Module.register("MMM-Growatt", {
         const batteryLabel = document.createElement("div");
         batteryLabel.id = "battery-label";
         batteryLabel.classList.add("label");
-        if (this.growattData[0].discharging > 0) {
+        if (this.growattData[0].discharging > 0 || this.growattData[0].discharging < 0) {
             batteryLabel.innerHTML = `${this.growattData[0].discharging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
         } else if (this.growattData[0].charging > 0 || this.growattData[0].charging <= 0) {
             batteryLabel.innerHTML = `${this.growattData[0].charging}W <br> SoC: ${this.growattData[0].stateOfCharge}%`;
