@@ -3,303 +3,447 @@
 * ****************************************/
 
 #growatt-wrapper {
-    --width: 600px;
-    --height: 500px;
-    --line-width: 8px;
-    --active-color: #0cf747;
-    --default-color: var(--color-text);
-    --line-margin: calc(var(--line-width) * 10);
-    --vertical-center: calc(var(--height) / 2);
-    --horizontal-center: calc(var(--width) / 2);
-    --line-border-radius: calc(var(--line-width) / 5);
-    --arrow-size: calc(var(--line-width) * 1.5);
-    --vertical-line-length: 100px;
-    --horizontal-line-length: 100px;
-    --images-size: calc(var(--line-margin) * 0.5);
-  
-    width: var(--width);
-    height: var(--height);
-    position: absolute;
-    left: calc(50% - (var(--width) / 2));
-    top: calc(50% - (var(--width) / 2));
-    /* background-color: var(--color-background); */
-  }
+  --width: 600px;
+  --height: 500px;
+  --line-width: 8px;
+  --active-color: #0cf747;
+  --default-color: var(--color-text);
+  --line-margin: calc(var(--line-width) * 10);
+  --vertical-center: calc(var(--height) / 2);
+  --horizontal-center: calc(var(--width) / 2);
+  --line-border-radius: calc(var(--line-width) / 5);
+  --arrow-size: calc(var(--line-width) * 1.5);
+  --vertical-line-length: 100px;
+  --horizontal-line-length: 100px;
+  --images-size: calc(var(--line-margin) * 0.5);
 
-  #growatt-table-wrapper {
-    width: 100%;
-      display: flex;
-      justify-content: center;
-   }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .active {
-    color: #0cf747;
-    background-color: #08f310;
-  }
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  left: calc(50% - (var(--width) / 2));
+  top: calc(50% - (var(--width) / 2));
+  /* background-color: var(--color-background); */
+}
 
-  .active-amber {
-    color: orange;
-    background-color: orange;
-  }
+#growatt-table-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-  .active-red {
-    color: red;
-    background-color: red;
-  }
+.hidden {
+  display: none;
+}
 
-  .gridactive {
-    color: red;
-    background-color: red;
-  }
-  
-  .font-green {
-    color: #0cf747;
-  }
-  
-  .font-red {
-    color: #E09690;
-  }
+.active {
+  color: #0cf747;
+  background-color: #08f310;
+}
 
-  .font-amber {
-    color: orange !important;
-  }
-  
-  /* ****************************************
+.active-amber {
+  color: orange;
+  background-color: orange;
+}
+
+.active-red {
+  color: red;
+  background-color: red;
+}
+
+.gridactive {
+  color: red;
+  background-color: red;
+}
+
+.font-green {
+  color: #0cf747;
+}
+
+.font-red {
+  color: #e09690;
+}
+
+.font-amber {
+  color: orange !important;
+}
+
+/* ****************************************
   *    Icons
   * ****************************************/
 
-  .images {
-    position: absolute;
-    display: block;
-    height: 80px;
-    width: 80px;
-    background-size: 100% !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: linear-gradient(90deg, #302b6b 0%, #2e5a90 100%);
-  }
-
-  .images.state_grid{background-image:url(images/state_grid.png)}
-  .images.state_bat_null{background-image:url(images/state_bat_null.png)}
-  .images.state_load{background-image:url(images/state_loadS.png)}
-  .images.state_solor{background-image:url(images/state_solor.png)}
-  .images.state_spf5000{background-image:url(images/state_spf5000.png)}
-  
-  .images.horizontal {
-    top: calc(var(--vertical-center) - (80px / 2));
-  }
-  
-  .images.vertical {
-    left: calc(var(--horizontal-center) - (80px / 2));
-  }
-
-  .images.inv {
-    top: 200px;
-    left: 260px;
-  }
-  
-  .images.top {
-    top: 0px;
-  }
-  
-  .images.bottom {
-    bottom: -3px;
-  }
-  
-  .images.left {
-    left: 0px;
-  }
-  
-  .images.right {
-    right: 0px;
-  }
-  
-  /* ****************************************
-  *    Labels
-  * ****************************************/
-  
-  .label {
-    position: absolute;
-    color: var(--default-color);
-    font-family: var(--font-primary);
-    font-weight: bold;
-    font-size: var(--font-size-small);
-    /* border: 2px solid; */
-    /* border-color: var(--default-color); */
-    /* border-radius: 3px; */
-    padding: 3px;
-    text-align: center;
-    white-space: nowrap;
-    width: 10ch;
-    position: absolute;
-  }
-  
-  #home-label {
-    left: 120px;
-    top: 40px;
-  }
-  
-  #solar-label {
-    left: 50px;
-    bottom: 120px;
-  }
-  
-  #battery-label {
-    left: 50px;
-    bottom: -90px;
-  }
-  
-  #grid-label {
-    right: 100px;
-    bottom: -75px;
-  }
-
-  #static-label {
-    right: 200px;
-    bottom: -90px;
-    font-size: small;
-  }
-
-  #info-label {
-    right: 200px;
-    bottom: 50px;
-    font-size: medium;
-  }
-  
-  /* ****************************************
-  *    Lines
-  * ****************************************/
-  
-  .line {
-    background-color: var(--default-color);
-  }
-  
-  .line.active {
-    background-color: var(--active-color);
-  }
-
-  .line.active-amber {
-    background-color: orange;
-  }
-
-  .line.active-red {
-    background-color: red;
-  }
-
-  .line.vertical.top {
-    top: 85px;
-  }
-  
-  .line.vertical {
-    width: var(--line-width);
-    height: var(--vertical-line-length);
-    left: calc(var(--horizontal-center) - (var(--line-width) / 2));
-    border-radius: var(--line-border-radius);
-    position: relative;
-  }
-  
-  .line.vertical.up {
-    position: absolute;
-    top: var(--line-margin);
-  }
-  
-  .line.vertical.down {
-    position: absolute;
-    bottom: 95px;
-  }
-  
-  .line.horizontal {
-    width: var(--horizontal-line-length);
-    height: var(--line-width);
-    top: calc(var(--vertical-center) - (var(--line-width) / 2));
-    border-radius: var(--line-border-radius);
-  }
-  
-  .line.horizontal.left {
-    position: absolute;
-    left: 95px;
-  }
-  
-  .line.horizontal.right {
-    position: absolute;
-    right: 130px;
-  }
-  
-  /* ****************************************
-  *    Arrows
-  * ****************************************/
-  
-  
-  .arrow {
-    --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px);
-    --arrow-line-centering: calc(-1 * (var(--arrow-size) / 2) + (var(--line-width) / 2));
-    width: var(--arrow-size);
-    height: var(--arrow-size);
-    background-color: rgba(0, 0, 0, 0);
-    content: url("icons/caret-down.svg");
-  }
-  
-  .arrow.active {
-    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
-  }
-
-  .arrow.active-amber {
-    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
-  }
-
-  .arrow.active-red {
-    filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
-  }
-  
-  .arrow.right {
-    position: absolute;
-    transform: rotate(-90deg);
-    right: var(--arrow-line-distance);
-    top: var(--arrow-line-centering);
-  }
-  
-  .arrow.left {
-    position: absolute;
-    transform: rotate(90deg);
-    left: var(--arrow-line-distance);
-    top: var(--arrow-line-centering);
-  }
-  
-  .arrow.up {
-    position: absolute;
-    transform: rotate(180deg);
-    top: var(--arrow-line-distance);
-    left: var(--arrow-line-centering);
-  }
-  
-  .arrow.down {
-    position: absolute;
-    bottom: var(--arrow-line-distance);
-    left: var(--arrow-line-centering);
-  }
-
-  .growatt-table {
-    width: 90%;
-    border-collapse: collapse;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    text-align: center;
+.images {
+  position: absolute;
+  display: block;
+  height: 80px;
+  width: 80px;
+  background-size: 100% !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: linear-gradient(90deg, #302b6b 0%, #2e5a90 100%);
 }
 
-.growatt-table td {
-    padding: 10px;
-    border: 1px solid white;
+.images.state_grid {
+  background-image: url(images/state_grid.png);
+}
+.images.state_bat_null {
+  background-image: url(images/state_bat_null.png);
+}
+.images.state_load {
+  background-image: url(images/state_loadS.png);
+}
+.images.state_solor {
+  background-image: url(images/state_solor.png);
+}
+.images.state_spf5000 {
+  background-image: url(images/state_spf5000.png);
+}
+
+.images.horizontal {
+  top: calc(var(--vertical-center) - (80px / 2));
+}
+
+.images.vertical {
+  left: calc(var(--horizontal-center) - (80px / 2));
+}
+
+.images.inv {
+  top: 200px;
+  left: 260px;
+}
+
+.images.top {
+  top: 0px;
+}
+
+.images.bottom {
+  bottom: -3px;
+}
+
+.images.left {
+  left: 0px;
+}
+
+.images.right {
+  right: 0px;
+}
+
+/* ****************************************
+  *    Labels
+  * ****************************************/
+
+.label {
+  position: absolute;
+  color: var(--default-color);
+  font-family: var(--font-primary);
+  font-weight: bold;
+  font-size: var(--font-size-small);
+  /* border: 2px solid; */
+  /* border-color: var(--default-color); */
+  /* border-radius: 3px; */
+  padding: 3px;
+  text-align: center;
+  white-space: nowrap;
+  width: 10ch;
+  position: absolute;
+}
+
+#home-label {
+  left: 120px;
+  top: 40px;
+}
+
+#solar-label {
+  left: 50px;
+  bottom: 120px;
+}
+
+#battery-label {
+  left: 50px;
+  bottom: -90px;
+}
+
+#grid-label {
+  right: 100px;
+  bottom: -75px;
+}
+
+#static-label {
+  right: 200px;
+  bottom: -90px;
+  font-size: small;
+}
+
+#info-label {
+  right: 200px;
+  bottom: 50px;
+  font-size: medium;
+}
+
+/* ****************************************
+  *    Lines
+  * ****************************************/
+
+.line {
+  background-color: var(--default-color);
+  height: 8px;
+  width: 200px;
+  border-radius: 4px;
+}
+
+.line.active {
+  background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--active-color) 50%,
+      transparent 100%
+    ),
+    var(--default-color);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: lineFlowRight 2s linear infinite;
+}
+
+.line.gridline-active-imp {
+  background: linear-gradient(
+      to right,
+      transparent 0%,
+      red 50%,
+      transparent 100%
+    ),
+    var(--default-color);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: lineFlowRight 2s linear infinite;
+}
+
+.line.gridline-active-exp {
+  background: linear-gradient(
+      to left,
+      transparent 0%,
+      blue 50%,
+      transparent 100%
+    ),
+    var(--default-color);
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  animation: lineFlowLeft 2s linear infinite;
+}
+
+.line.active-down {
+  background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #0cf747 50%,
+      transparent 100%
+    ),
+    var(--default-color);
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  animation: lineFlowDown 2s linear infinite;
+}
+
+.line.active-amber {
+  background: linear-gradient(
+      to top,
+      transparent 0%,
+      orange 50%,
+      transparent 100%
+    ),
+    var(--default-color);
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  animation: lineFlowUp 2s linear infinite;
+}
+
+.line.active-red {
+  background: linear-gradient(to top, transparent 0%, red 50%, transparent 100%),
+    var(--default-color);
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  animation: lineFlowUp 2s linear infinite;
+}
+
+.line.vertical.top {
+  top: 85px;
+}
+
+.line.vertical {
+  width: var(--line-width);
+  height: var(--vertical-line-length);
+  left: calc(var(--horizontal-center) - (var(--line-width) / 2));
+  border-radius: var(--line-border-radius);
+  position: relative;
+}
+
+.line.vertical.up {
+  position: absolute;
+  top: var(--line-margin);
+}
+
+.line.vertical.down {
+  position: absolute;
+  bottom: 95px;
+}
+
+.line.horizontal {
+  width: var(--horizontal-line-length);
+  height: var(--line-width);
+  top: calc(var(--vertical-center) - (var(--line-width) / 2));
+  border-radius: var(--line-border-radius);
+}
+
+.line.horizontal.left {
+  position: absolute;
+  left: 95px;
+}
+
+.line.horizontal.right {
+  position: absolute;
+  right: 130px;
+}
+
+/* ****************************************
+  *    Arrows
+  * ****************************************/
+
+.arrow {
+  --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px);
+  --arrow-line-centering: calc(
+    -1 * (var(--arrow-size) / 2) + (var(--line-width) / 2)
+  );
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  background-color: rgba(0, 0, 0, 0);
+  content: url("icons/caret-down.svg");
+}
+
+.arrow.active {
+  filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
+    brightness(102%) contrast(101%);
+  -webkit-filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
+    brightness(102%) contrast(101%);
+}
+
+.arrow.active-amber {
+  filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
+    brightness(102%) contrast(101%);
+}
+
+.arrow.active-red {
+  filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
+    brightness(102%) contrast(101%);
+}
+
+.arrow.right {
+  position: absolute;
+  transform: rotate(-90deg);
+  right: var(--arrow-line-distance);
+  top: var(--arrow-line-centering);
+}
+
+.arrow.left {
+  position: absolute;
+  transform: rotate(90deg);
+  left: var(--arrow-line-distance);
+  top: var(--arrow-line-centering);
+}
+
+.arrow.up {
+  position: absolute;
+  transform: rotate(180deg);
+  top: var(--arrow-line-distance);
+  left: var(--arrow-line-centering);
+}
+
+.arrow.down {
+  position: absolute;
+  bottom: var(--arrow-line-distance);
+  left: var(--arrow-line-centering);
 }
 
 .growatt-table {
-    font-weight: bold;
-    font-size: 1.2rem;
+  width: 90%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+}
+
+.growatt-table td {
+  padding: 10px;
+  border: 1px solid white;
+}
+
+.growatt-table {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .footer {
-    font-style: italic;
-    font-size: 0.9rem;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ****************************************
+*    Keyframes
+* ****************************************/
+
+@keyframes pulseFlow {
+  0% {
+    transform: translateY(-4px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(4px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes lineFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes lineFlowRight {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes lineFlowLeft {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes lineFlowUp {
+  from {
+    background-position: 0 -200%;
+  }
+  to {
+    background-position: 0 200%;
+  }
+}
+
+@keyframes lineFlowDown {
+  from {
+    background-position: 0 200%;
+  }
+  to {
+    background-position: 0 -200%;
+  }
 }

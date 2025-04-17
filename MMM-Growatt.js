@@ -311,7 +311,7 @@ Module.register("MMM-Growatt", {
         solarLine.appendChild(infoLabel);
 
         if (ppvData > 0) {
-            solarLine.classList.add("active");
+            solarLine.classList.add("active-down");
 
             const solarArrowOut = document.createElement("i");
             solarArrowOut.classList.add("arrow", "down", "active");
@@ -361,8 +361,10 @@ Module.register("MMM-Growatt", {
         if (this.growattData[0].gridPower) {
             gridLabel.innerHTML = `${this.growattData[0].gridPower}W`;
         } else if (this.growattData[0].importFromGrid > 0) {
+            gridLine.classList.add("gridline-active-imp")
             gridLabel.innerHTML = `${this.growattData[0].importFromGrid}W`;
         } else if (this.growattData[0].exportToGrid > 0) {
+            gridLine.classList.add("gridline-active-exp")
             gridLabel.innerHTML = `${this.growattData[0].exportToGrid}W`;
         }
         gridLine.appendChild(gridLabel);
@@ -370,21 +372,21 @@ Module.register("MMM-Growatt", {
         // Positive value means feeding to grid
         if (this.growattData[0].gridPower > 0) {
             // gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
-            gridLine.classList.add("active-red")
+            gridLine.classList.add("active-red", "gridline-active-exp")
             gridLabel.classList.add("font-red");
 
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
         } else if (this.growattData[0].importFromGrid > 0) {
-            gridLine.classList.add("active-red")
+            gridLine.classList.add("active-red", "gridline-active-exp")
             gridLabel.classList.add("font-red");
 
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
         } else if (this.growattData[0].exportToGrid > 0) {
-            gridLine.classList.add("active")
+            gridLine.classList.add("active", "gridine-active-exp")
             //gridLabel.classList.add("font-red");
 
             const gridArrowOut = document.createElement("div");
@@ -424,7 +426,7 @@ Module.register("MMM-Growatt", {
         // Negative value means charging battery
         if (this.growattData[0].charging < 0 || this.growattData[0].charging > 0) {
             // batteryLabel.innerHTML += this.translate("BATTERY_CHARGING");
-            batteryLine.classList.add("active");
+            batteryLine.classList.add("active-down");
             batteryLabel.classList.add("font-green");
 
             const batteryArrowIn = document.createElement("i");
