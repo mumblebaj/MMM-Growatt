@@ -62,6 +62,20 @@ npm install
 ```` 
 ## Changes
 
+### 2025/04/17
+- Added animation to the arrow lines for a better visual effect
+#### Example: All arrows active
+All arrows are active feeding from grid and solar, feeding home and charging battery.
+![Example](images/image-13.gif)
+
+#### Example: Solar, home and Battery, no Grid feed
+Example shows that Solar is charging battery and feeding home
+![Example](images/image-12.gif)
+
+#### Example: Battery and Solar feeding home
+Example of Battery and Solr feeding home.
+![Example](images/image-11.gif)
+
 ### 2025/03/21
 - Added support for noah, which is part of the Growatt Neo 800Mx package. The setup of this Neo package is a little different to the normal setup. This now adds support for this Neo package. 
 
