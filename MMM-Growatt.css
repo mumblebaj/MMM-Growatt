@@ -3,27 +3,37 @@
 * ****************************************/
 
 #growatt-wrapper {
-  --width: 600px;
-  --height: 500px;
+  --width: 100%;
+  --max-width: 600px;
+  height: 500px;
   --line-width: 8px;
   --active-color: #0cf747;
   --default-color: var(--color-text);
   --line-margin: calc(var(--line-width) * 10);
-  --vertical-center: calc(var(--height) / 2);
-  --horizontal-center: calc(var(--width) / 2);
   --line-border-radius: calc(var(--line-width) / 5);
   --arrow-size: calc(var(--line-width) * 1.5);
-  --vertical-line-length: 100px;
-  --horizontal-line-length: 100px;
+/*  --vertical-line-length: 100px;
+  --horizontal-line-length: 100px; */
+  --vertical-line-length: clamp(80px, 15vh, 100px);
+  --horizontal-line-length: clamp(80px, 15vw, 150px);
   --images-size: calc(var(--line-margin) * 0.5);
 
   width: var(--width);
-  height: var(--height);
-  position: absolute;
-  left: calc(50% - (var(--width) / 2));
-  top: calc(50% - (var(--width) / 2));
-  /* background-color: var(--color-background); */
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
 }
+
+.module-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 
 #growatt-table-wrapper {
   width: 100%;
@@ -74,13 +84,15 @@
 .images {
   position: absolute;
   display: block;
-  height: 80px;
-  width: 80px;
-  background-size: 100% !important;
+  height: clamp(50px, 8vw, 80px);
+  width: clamp(50px, 8vw, 90px);
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: linear-gradient(90deg, #302b6b 0%, #2e5a90 100%);
+  background-color: transparent;
 }
+
+
 
 .images.state_grid {
   background-image: url(images/state_grid.png);
@@ -99,33 +111,45 @@
 }
 
 .images.horizontal {
-  top: calc(var(--vertical-center) - (80px / 2));
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .images.vertical {
-  left: calc(var(--horizontal-center) - (80px / 2));
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .images.inv {
-  top: 200px;
-  left: 260px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .images.top {
-  top: 0px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .images.bottom {
-  bottom: -3px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .images.left {
-  left: 0px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .images.right {
-  right: 0px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
+
 
 /* ****************************************
   *    Labels
@@ -268,54 +292,53 @@
 }
 
 .line.vertical {
+  position: absolute;
   width: var(--line-width);
   height: var(--vertical-line-length);
-  left: calc(var(--horizontal-center) - (var(--line-width) / 2));
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: var(--line-border-radius);
-  position: relative;
 }
 
 .line.vertical.up {
-  position: absolute;
-  top: var(--line-margin);
+  top: 15%; /* or adjust as needed */
 }
 
 .line.vertical.down {
-  position: absolute;
-  bottom: 95px;
+  bottom: 20%; /* or adjust as needed */
 }
 
+
 .line.horizontal {
+  position: absolute;
   width: var(--horizontal-line-length);
   height: var(--line-width);
-  top: calc(var(--vertical-center) - (var(--line-width) / 2));
+  top: 50%;
+  transform: translateY(-50%);
   border-radius: var(--line-border-radius);
 }
 
 .line.horizontal.left {
-  position: absolute;
-  left: 95px;
+  left: 15%; /* or adjust as needed */
 }
 
 .line.horizontal.right {
-  position: absolute;
-  right: 130px;
+  right: 17%; /* or adjust as needed */
 }
+
 
 /* ****************************************
   *    Arrows
   * ****************************************/
 
 .arrow {
-  --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px);
-  --arrow-line-centering: calc(
-    -1 * (var(--arrow-size) / 2) + (var(--line-width) / 2)
-  );
+  position: absolute;
   width: var(--arrow-size);
   height: var(--arrow-size);
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   content: url("icons/caret-down.svg");
 }
+
 
 .arrow.active {
   filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
@@ -334,32 +357,30 @@
     brightness(102%) contrast(101%);
 }
 
-.arrow.right {
-  position: absolute;
-  transform: rotate(-90deg);
-  right: var(--arrow-line-distance);
-  top: var(--arrow-line-centering);
-}
-
-.arrow.left {
-  position: absolute;
-  transform: rotate(90deg);
-  left: var(--arrow-line-distance);
-  top: var(--arrow-line-centering);
-}
-
 .arrow.up {
-  position: absolute;
-  transform: rotate(180deg);
-  top: var(--arrow-line-distance);
-  left: var(--arrow-line-centering);
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
 }
 
 .arrow.down {
-  position: absolute;
-  bottom: var(--arrow-line-distance);
-  left: var(--arrow-line-centering);
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
 }
+
+.arrow.left {
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.arrow.right {
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
 
 .growatt-table {
   width: 90%;
