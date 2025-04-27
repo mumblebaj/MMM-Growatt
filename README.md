@@ -62,6 +62,9 @@ npm install
 ```` 
 ## Changes
 
+### 2025/04/25
+- Change the module CSS to be a little more flexible and fit better in regions other the `middle_center`
+
 ### 2025/04/17
 - Added animation to the arrow lines for a better visual effect
 #### Example: All arrows active
