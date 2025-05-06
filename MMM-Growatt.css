@@ -12,8 +12,6 @@
   --line-margin: calc(var(--line-width) * 10);
   --line-border-radius: calc(var(--line-width) / 5);
   --arrow-size: calc(var(--line-width) * 1.5);
-/*  --vertical-line-length: 100px;
-  --horizontal-line-length: 100px; */
   --vertical-line-length: clamp(80px, 15vh, 100px);
   --horizontal-line-length: clamp(80px, 15vw, 150px);
   --images-size: calc(var(--line-margin) * 0.5);
@@ -33,7 +31,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 #growatt-table-wrapper {
   width: 100%;
@@ -92,8 +89,6 @@
   background-color: transparent;
 }
 
-
-
 .images.state_grid {
   background-image: url(images/state_grid.png);
 }
@@ -150,7 +145,6 @@
   transform: translateY(-50%);
 }
 
-
 /* ****************************************
   *    Labels
   * ****************************************/
@@ -161,9 +155,6 @@
   font-family: var(--font-primary);
   font-weight: bold;
   font-size: var(--font-size-small);
-  /* border: 2px solid; */
-  /* border-color: var(--default-color); */
-  /* border-radius: 3px; */
   padding: 3px;
   text-align: center;
   white-space: nowrap;
@@ -308,7 +299,6 @@
   bottom: 20%; /* or adjust as needed */
 }
 
-
 .line.horizontal {
   position: absolute;
   width: var(--horizontal-line-length);
@@ -326,19 +316,59 @@
   right: 17%; /* or adjust as needed */
 }
 
-
 /* ****************************************
   *    Arrows
   * ****************************************/
 
 .arrow {
-  position: absolute;
+  --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px); /* Slight offset */
+  --arrow-line-centering: calc(
+    -1 * (var(--arrow-size) / 2) + (var(--line-width) / 2)
+  );
   width: var(--arrow-size);
   height: var(--arrow-size);
   background-color: transparent;
   content: url("icons/caret-down.svg");
+  z-index: 2; /* ensure it’s above the line */
 }
 
+/* Fine-tuned direction-based adjustments */
+
+.arrow.right {
+  position: absolute;
+  transform: rotate(-90deg) translateX(0%);
+  right: calc(var(--arrow-size) * -0.5);
+  top: 50%;
+  transform-origin: center;
+  translate: 0 -50%;
+}
+
+.arrow.left {
+  position: absolute;
+  transform: rotate(90deg) translateX(0%);
+  left: calc(var(--arrow-size) * -0.5);
+  top: 50%;
+  transform-origin: center;
+  translate: 0 -50%;
+}
+
+.arrow.up {
+  position: absolute;
+  transform: rotate(180deg) translateY(0%);
+  top: calc(var(--arrow-size) * -0.5);
+  left: 50%;
+  transform-origin: center;
+  translate: -50% 0;
+}
+
+.arrow.down {
+  position: absolute;
+  bottom: calc(var(--arrow-size) * -0.5);
+  transform: translateY(30%);
+  left: 50%;
+  transform-origin: center;
+  translate: -50% 0;
+}
 
 .arrow.active {
   filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg)
@@ -357,30 +387,9 @@
     brightness(102%) contrast(101%);
 }
 
-.arrow.up {
-  top: 0%;
-  left: 50%;
-  transform: translateX(-50%) rotate(180deg);
-}
-
-.arrow.down {
-  bottom: 0%;
-  left: 50%;
-  transform: translateX(-50%) rotate(0deg);
-}
-
-.arrow.left {
-  top: 50%;
-  left: 0%;
-  transform: translateY(-50%) rotate(90deg);
-}
-
-.arrow.right {
-  top: 50%;
-  right: 0%;
-  transform: translateY(-50%) rotate(-90deg);
-}
-
+ /* ****************************************
+  *    TABLE
+  * ****************************************/
 
 .growatt-table {
   width: 90%;
