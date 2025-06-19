@@ -1,6 +1,6 @@
 {
   "name": "mmm-growatt",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "MagicMirror Module to display Growatt data",
   "main": "MMM-Growatt.js",
   "scripts": {
@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/mumblebaj/MMM-Growatt#readme",
   "dependencies": {
-    "growatt": "^0.7.4"
+    "growatt": "^0.7.7"
   }
 }
