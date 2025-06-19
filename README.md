@@ -67,6 +67,9 @@ npm install
 ```` 
 ## Changes
 
+### 2025/06/10 v2.1.6
+- Update growatt module to latest
+
 ### 2025/04/25
 - Change the module CSS to be a little more flexible and fit better in regions other the `middle_center`
 
