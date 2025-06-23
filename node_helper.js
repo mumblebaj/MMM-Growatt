@@ -284,6 +284,56 @@ module.exports = NodeHelper.create({
             plantid: key,
             data: { ...rest, devicesData }
           })
+          let epv1Today = data[0].data.devicesData[0].data.historyLast.epv1Today;
+          let epv2Today = data[0].data.devicesData[0].data.historyLast.epv2Today;
+          let epv3Today = data[0].data.devicesData[0].data.historyLast.epv3Today;
+          let epv4Today = data[0].data.devicesData[0].data.historyLast.epv4Today;
+          let epvToday = parseInt(epv1Today) + parseInt(epv2Today) + parseInt(epv3Today) + parseInt(epv4Today);
+          let eselfToday = data[0].data.devicesData[0].data.historyLast.eselfToday;
+          let eselfTotal = data[0].data.devicesData[0].data.historyLast.eselfTotal;
+          let elocalLoadToday = data[0].data.devicesData[0].data.historyLast.elocalLoadToday;
+          let esystemToday = data[0].data.devicesData[0].data.historyLast.esystemToday;
+          let esystemTotal = data[0].data.devicesData[0].data.historyLast.esystemTotal;
+          let importedFromGridToday = data[0].data.devicesData[0].data.statusData.pactouser / 1000;
+          let importedFromGridTotal = elocalLoadToday - eselfToday;
+          let exportedToGridToday = data[0].data.devicesData[0].data.statusData.pactogrid; //data[0].data.devicesData[0].data.statusData.pacstouser;
+          let exportedToGridTotal = data[0].data.devicesData[0].data.historyLast.pacToGridTotal;
+          plantDataFiltered.push({
+            "growattType": "mix",
+            "plantName": data[0].data.plantName,
+            "country": data[0].data.plantData.country,
+            "city": data[0].data.plantData.city,
+            "accountName": data[0].data.plantData.accountName,
+            "inverterPower": data[0].data.plantData.nominalPower,
+            "treesSaved": data[0].data.plantData.tree,
+            "coalSaved": data[0].data.plantData.coal,
+            "ppv": data[0].data.devicesData[0].data.statusData.ppv,
+            "ppv1": data[0].data.devicesData[0].data.statusData.pPv1,
+            "ppv2": data[0].data.devicesData[0].data.statusData.pPv2,
+            "ppv3": data[0].data.devicesData[0].data.statusData.pPv3,
+            "ppv4": data[0].data.devicesData[0].data.statusData.pPv4,
+            "importFromGrid": data[0].data.devicesData[0].data.statusData.pactouser,
+            "exportToGrid": data[0].data.devicesData[0].data.statusData.pactogrid,
+            "discharging": data[0].data.devicesData[0].data.statusData.pdisCharge,
+            "charging": data[0].data.devicesData[0].data.statusData.chargePower,
+            "stateOfCharge": data[0].data.devicesData[0].data.statusData.SOC,
+            "consumptionPower": data[0].data.devicesData[0].data.statusData.pLocalLoad,
+            "staticTakenAt": data[0].data.devicesData[0].data.deviceData.lastUpdateTime,
+            "useEnergyToday": data[0].data.devicesData[0].data.historyLast.elocalLoadToday,
+            "useEnergyTotal": data[0].data.devicesData[0].data.historyLast.elocalLoadTotal,
+            "chargeToday": data[0].data.devicesData[0].data.historyLast.echargeToday,
+            "chargeTotal": data[0].data.devicesData[0].data.historyLast.echargeTotal,
+            "eDischargeTotal": data[0].data.devicesData[0].data.historyLast.edischargeTotal,
+            "eDischargeToday": data[0].data.devicesData[0].data.historyLast.edischargeToday,
+            "importedFromGridToday": importedFromGridToday,
+            "importedFromGridTotal": importedFromGridTotal,
+            "exportedToGridToday": exportedToGridToday,
+            "exportedToGridTotal": exportedToGridTotal,
+            "eToUserTotal": exportedToGridTotal,
+            "eToUserToday": exportedToGridToday,
+            "epvToday": epvToday,
+            "epvTotal": data[0].data.devicesData[0].data.historyLast.epvTotal
+          })
         }
 
         else if (devices[sn].growattType === "spa") {

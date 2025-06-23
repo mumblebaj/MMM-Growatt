@@ -1,7 +1,7 @@
 {
   "name": "mmm-growatt",
-  "version": "2.1.6",
-  "description": "MagicMirror Module to display Growatt data",
+  "version": "2.1.7",
+  "description": "MagicMirror² Module to display Growatt data",
   "main": "MMM-Growatt.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
