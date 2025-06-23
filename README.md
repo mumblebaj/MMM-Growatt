@@ -67,6 +67,9 @@ npm install
 ```` 
 ## Changes
 
+### 2025/06/23
+- Add Inverter type mix
+
 ### 2025/06/10 v2.1.6
 - Update growatt module to latest
 
@@ -75,6 +78,7 @@ npm install
 
 ### 2025/04/17
 - Added animation to the arrow lines for a better visual effect
+
 #### Example: All arrows active
 All arrows are active feeding from grid and solar, feeding home and charging battery.
 ![Example](images/image-13.gif)
