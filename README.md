@@ -67,6 +67,13 @@ npm install
 ```` 
 ## Changes
 
+### 2025/06/24 - v2.2.0
+#### You do not have to upgrade to this latest version unless your current version is no longer working.
+- Refactor node_helper code
+- Improve logic
+- Add new helper functions
+- Add a retry for login and getAllPlantData
+
 ### 2025/06/23
 - Add Inverter type mix
 
