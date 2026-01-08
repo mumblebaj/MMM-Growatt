@@ -67,6 +67,9 @@ npm install
 ```` 
 ## Changes
 
+### 2026/01/08
+- Update discharge logic for `tlxh`, `tlx` and `mix` if pdisCharge is `null` or `undefined` then use `pdisCharge1` or `0`
+
 ### 2025/06/24 - v2.2.0
 #### You do not have to upgrade to this latest version unless your current version is no longer working.
 - Refactor node_helper code
