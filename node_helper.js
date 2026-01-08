@@ -144,7 +144,7 @@ module.exports = NodeHelper.create({
             ppv4: s.ppv4 ?? s.pPv4,
             importFromGrid: s.pactouser,
             exportToGrid: s.pactogrid,
-            discharging: s.pdisCharge,
+            discharging: s.pdisCharge ?? s.pdisCharge1 ?? 0,
             charging: s.chargePower,
             stateOfCharge: s.SOC,
             consumptionPower: s.pLocalLoad,
