@@ -19,6 +19,9 @@ If you like my module you can support my work by giving me a star ir buy me a co
 - Requires MagicMirror² v2.21.0. Built and tested on this version. May work on earlier versions but not tested nor supported.
 - Requires that you have an account on [Growatt.com](https://server.growatt.com/login)
 
+## NOTE!!!
+Recently it has been found that if a user makes excessive requests, Growatt will disable the user account for a 24hr period of time. In extreme cases the account can be blocked entirely. To avoid this, it is HIGHLY recommended that users set the `updateInterval` to a minimum of 15 minutes. My suggestion would be 30 minutes to be on the safe side.
+
 ## Installation
 
 In your terminal, go to your MagicMirror's Module folder:
@@ -139,3 +142,8 @@ Updated module to no longer require user to specify plantId and deviceSerial. Th
 - Had a request from user [ruralbrewer](https://github.com/ruralbrewer) to add support for [https://server-us.growatt.com](https://server-us.growatt.com).
 - Users in the US registered on the US Growatt Server are now able to use the module.
 - A new Config option  usServer: true must be added to the config/config.js. Users registered on the [https://server.growatt.com](https://server.growatt.com) need not add this option.
+
+## Planned / Requested Changes
+[] Add icon pack options
+[] Animated icons
+[] Change logic for Solar line to use W or kW
