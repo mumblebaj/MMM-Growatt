@@ -3,21 +3,20 @@
 * ****************************************/
 
 #growatt-wrapper {
-  --width: 100%;
   --max-width: 600px;
-  height: 500px;
-  --line-width: 8px;
+  --line-width: clamp(5px, 1.2vw, 8px);
   --active-color: #0cf747;
   --default-color: var(--color-text);
   --line-margin: calc(var(--line-width) * 10);
   --line-border-radius: calc(var(--line-width) / 5);
   --arrow-size: calc(var(--line-width) * 1.5);
-  --vertical-line-length: clamp(80px, 15vh, 100px);
-  --horizontal-line-length: clamp(80px, 15vw, 150px);
-  --images-size: calc(var(--line-margin) * 0.5);
+  --vertical-line-length: clamp(55px, 20%, 100px);
+  --horizontal-line-length: clamp(65px, 25%, 150px);
+  --images-size: clamp(44px, 14%, 84px);
 
-  width: var(--width);
+  width: min(100%, var(--max-width));
   max-width: var(--max-width);
+  aspect-ratio: 6 / 5;
   margin: 0 auto;
   position: relative;
   padding: 10px;
@@ -81,12 +80,18 @@
 .images {
   position: absolute;
   display: block;
-  height: clamp(50px, 8vw, 80px);
-  width: clamp(50px, 8vw, 90px);
-  background-size: cover;
+  width: var(--images-size);
+  height: var(--images-size);
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
+}
+
+.images > .images {
+  position: static;
+  width: 100%;
+  height: 100%;
 }
 
 .images.state_grid {
@@ -154,44 +159,43 @@
   color: var(--default-color);
   font-family: var(--font-primary);
   font-weight: bold;
-  font-size: var(--font-size-small);
+  font-size: clamp(0.7rem, 2.4vw, var(--font-size-small));
   padding: 3px;
   text-align: center;
   white-space: nowrap;
   width: 10ch;
-  position: absolute;
 }
 
 #home-label {
-  left: 120px;
-  top: 40px;
+  left: min(120px, 65%);
+  top: clamp(24px, 26%, 40px);
 }
 
 #solar-label {
-  left: 50px;
-  bottom: 120px;
+  left: min(50px, 40%);
+  bottom: clamp(70px, 32%, 120px);
 }
 
 #battery-label {
-  left: 50px;
-  bottom: -90px;
+  left: min(50px, 40%);
+  bottom: clamp(-90px, -20%, -58px);
 }
 
 #grid-label {
-  right: 100px;
-  bottom: -75px;
+  right: min(100px, 62%);
+  bottom: clamp(-75px, -18%, -50px);
 }
 
 #static-label {
-  right: 200px;
-  bottom: -90px;
-  font-size: small;
+  right: min(200px, 80%);
+  bottom: clamp(-90px, -20%, -58px);
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
 }
 
 #info-label {
-  right: 200px;
-  bottom: 50px;
-  font-size: medium;
+  right: min(200px, 80%);
+  bottom: clamp(30px, 15%, 50px);
+  font-size: clamp(0.72rem, 2.2vw, 1rem);
 }
 
 /* ****************************************
@@ -200,9 +204,9 @@
 
 .line {
   background-color: var(--default-color);
-  height: 8px;
-  width: 200px;
-  border-radius: 4px;
+  height: var(--line-width);
+  width: var(--horizontal-line-length);
+  border-radius: var(--line-border-radius);
 }
 
 .line.active {
@@ -279,7 +283,7 @@
 }
 
 .line.vertical.top {
-  top: 85px;
+  top: calc(var(--images-size) + 1%);
 }
 
 .line.vertical {
@@ -296,7 +300,7 @@
 }
 
 .line.vertical.down {
-  bottom: 20%; /* or adjust as needed */
+  bottom: calc(var(--images-size) + 4%);
 }
 
 .line.horizontal {
@@ -309,11 +313,11 @@
 }
 
 .line.horizontal.left {
-  left: 15%; /* or adjust as needed */
+  left: calc(var(--images-size) + 4%);
 }
 
 .line.horizontal.right {
-  right: 17%; /* or adjust as needed */
+  right: calc(var(--images-size) + 5%);
 }
 
 /* ****************************************
@@ -400,13 +404,18 @@
 }
 
 .growatt-table td {
-  padding: 10px;
+  padding: clamp(6px, 1.8vw, 10px);
   border: 1px solid white;
 }
 
 .growatt-table {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: clamp(0.85rem, 2.8vw, 1.2rem);
+}
+
+.growatt-table img {
+  width: clamp(28px, 10vw, 50px);
+  height: auto;
 }
 
 .footer {

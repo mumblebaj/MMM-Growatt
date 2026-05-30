@@ -111,7 +111,7 @@ Module.register("MMM-Growatt", {
     // First Row: Module Name
     const row1 = document.createElement("tr");
     row1.innerHTML = `
-            <td rowspan="2"><img id="module-icon" src="/modules/MMM-Growatt/images/state_spf5000.png" width="50"></td>
+            <td rowspan="2"><img id="module-icon" src="/modules/MMM-Growatt/images/state_spf5000.png"></td>
             <td id="module-name" colspan="3">${
               this.growattData[0]?.plantName || "Growatt Module"
             }</td>
@@ -137,7 +137,7 @@ Module.register("MMM-Growatt", {
 
       const rowElement = document.createElement("tr");
       rowElement.innerHTML = `
-                <td><img src="/modules/MMM-Growatt/images/${staticData.image}" width="40"></td>
+                <td><img src="/modules/MMM-Growatt/images/${staticData.image}"></td>
                 <td colspan="2">${staticData.label}</td>
                 <td id="${row}-value">-- W</td>
             `;
@@ -229,10 +229,6 @@ Module.register("MMM-Growatt", {
     while (wrapper.hasChildNodes()) {
       wrapper.removeChild(wrapper.firstChild);
     }
-
-    wrapper.style.setProperty("--width", "600px");
-    wrapper.style.setProperty("--height", "500px");
-    wrapper.style.setProperty("--line-width", "7px");
 
     this.addIcons(wrapper);
 
