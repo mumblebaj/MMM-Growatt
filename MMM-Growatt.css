@@ -10,13 +10,14 @@
   --line-margin: calc(var(--line-width) * 10);
   --line-border-radius: calc(var(--line-width) / 5);
   --arrow-size: calc(var(--line-width) * 1.5);
-  --vertical-line-length: clamp(55px, 20%, 100px);
-  --horizontal-line-length: clamp(65px, 25%, 150px);
-  --images-size: clamp(44px, 14%, 84px);
+  --vertical-line-length: clamp(80px, 15vh, 100px);
+  --horizontal-line-length: clamp(80px, 15vw, 150px);
+  --images-size: clamp(50px, 8vw, 80px);
 
-  width: min(100%, var(--max-width));
+  width: 100%;
   max-width: var(--max-width);
-  aspect-ratio: 6 / 5;
+  height: 500px;
+  height: clamp(360px, 83vw, 500px);
   margin: 0 auto;
   position: relative;
   padding: 10px;
@@ -167,34 +168,34 @@
 }
 
 #home-label {
-  left: min(120px, 65%);
-  top: clamp(24px, 26%, 40px);
+  left: 120px;
+  top: 40px;
 }
 
 #solar-label {
-  left: min(50px, 40%);
-  bottom: clamp(70px, 32%, 120px);
+  left: 50px;
+  bottom: 120px;
 }
 
 #battery-label {
-  left: min(50px, 40%);
-  bottom: clamp(-90px, -20%, -58px);
+  left: 50px;
+  bottom: -90px;
 }
 
 #grid-label {
-  right: min(100px, 62%);
-  bottom: clamp(-75px, -18%, -50px);
+  right: 100px;
+  bottom: -75px;
 }
 
 #static-label {
-  right: min(200px, 80%);
-  bottom: clamp(-90px, -20%, -58px);
+  right: 200px;
+  bottom: -90px;
   font-size: clamp(0.65rem, 2vw, 0.85rem);
 }
 
 #info-label {
-  right: min(200px, 80%);
-  bottom: clamp(30px, 15%, 50px);
+  right: 200px;
+  bottom: 50px;
   font-size: clamp(0.72rem, 2.2vw, 1rem);
 }
 
@@ -283,7 +284,7 @@
 }
 
 .line.vertical.top {
-  top: calc(var(--images-size) + 1%);
+  top: 85px;
 }
 
 .line.vertical {
@@ -300,7 +301,7 @@
 }
 
 .line.vertical.down {
-  bottom: calc(var(--images-size) + 4%);
+  bottom: 20%;
 }
 
 .line.horizontal {
@@ -313,11 +314,11 @@
 }
 
 .line.horizontal.left {
-  left: calc(var(--images-size) + 4%);
+  left: 15%;
 }
 
 .line.horizontal.right {
-  right: calc(var(--images-size) + 5%);
+  right: 17%;
 }
 
 /* ****************************************
